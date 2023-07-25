@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react"
 import ReactDOM from "react-dom"
-import { Container, Typography, AppBar, Toolbar, Stack, Button, TextField, Checkbox, FormControlLabel, Link } from "@mui/material"
-import { Message, ReciptInfo } from "../common/message_type"
+import { Container, Typography, AppBar, Toolbar, TextField, Link } from "@mui/material"
 
 const Popup = () => {
   const [token, setToken] = useState<string | null>(null)
