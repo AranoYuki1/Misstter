@@ -26,7 +26,7 @@
   ],
 
   "host_permissions": [
-    "https://misskey.io/*"
+    "<all_urls>"
   ],
 
   "web_accessible_resources": [

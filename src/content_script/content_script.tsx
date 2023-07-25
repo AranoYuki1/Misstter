@@ -25,21 +25,28 @@ const uploadImage = async (server: string, token: string, image: string) => {
 
   return fileID
 }
+
+type PostOptions = {
+  cw: boolean,
+  token: string,
+  server: string
+}
  
-export const postToMisskey = async (server: string, token: string, text: string, images: string[]) => {
+export const postToMisskey = async (text: string, images: string[], options: PostOptions) => {
   let fileIDs: string[] = []
   if (images.length != 0) {
     showNotification('Misskeyにファイルをアップロードしています...', 'success')
     console.log(images)
-    fileIDs = await Promise.all(images.map(image => uploadImage(server, token, image) ))   
+    fileIDs = await Promise.all(images.map(image => uploadImage(options.server, options.token, image) ))   
   }
 
-  const body: any = { "i": token }
+  const body: any = { "i": options.token }
   if (text) { body["text"] = text }
   if (fileIDs.length > 0) { body["fileIds"] = fileIDs }
+  if (options.cw) { body["cw"] = "" }
 
   try {
-    const res = await fetch(`${server}/api/notes/create`, {
+    const res = await fetch(`${options.server}/api/notes/create`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', },
       body: JSON.stringify(body),
@@ -99,18 +106,24 @@ const tweetAndMisskey = async () => {
     })
   })
 
-  const server = await new Promise<string>((resolve, reject) => {
-    chrome.storage.sync.get(['server'], (result) => {
+  let server = await new Promise<string>((resolve, reject) => {
+    chrome.storage.sync.get(['misskey_server'], (result) => {
       resolve(result.misskey_server ?? "https://misskey.io")
     })
   })
 
   if (server.endsWith('/')) {
-    server.slice(0, -1)
+    server = server.slice(0, -1)
   }
-  
-  await postToMisskey(server, token, text ?? "", images);
 
+  const cw = await new Promise<boolean>((resolve, reject) => {
+    chrome.storage.sync.get(['misskey_cw'], (result) => {
+      resolve(result.misskey_cw ?? false)
+    })
+  });
+
+  const options = { cw, token, server }
+  await postToMisskey(text ?? "", images, options);
 }
 
 const addMisskeyButton = (tweetBox: Node) => {
@@ -167,6 +180,7 @@ const observer = new MutationObserver(mutations => {
           if (node.nodeType === Node.ELEMENT_NODE) {
               const tweetBox = node.querySelector(buttonSelector);
               if (!tweetBox) return;
+              if (tweetBox.innerText === '返信' || tweetBox.innerText === 'Reply' || tweetBox.innerText === '답글' || tweetBox.innerText === '回复' || tweetBox.innerText === '回覆' || tweetBox.innerText === 'Répondre' || tweetBox.innerText === 'Responder' || tweetBox.innerText === 'Antworten' || tweetBox.innerText === 'Rispondi' || tweetBox.innerText === 'Responder' || tweetBox.innerText === 'Responder' || tweetBox.innerText === 'Antwoorden' || tweetBox.innerText === 'Svara' || tweetBox.innerText === 'Svar') return;
               addMisskeyButton(tweetBox);
           }
       });
