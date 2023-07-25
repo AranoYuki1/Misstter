@@ -41,6 +41,7 @@ const Popup = () => {
     })
   }
 
+  const donationPageUrl = "https://pielotopica.booth.pm/items/4955538";
   return (
     <>
       <AppBar position="static" sx={{ minWidth: 400 }}>
@@ -99,7 +100,7 @@ const Popup = () => {
         />
 
         <Link
-          href="https://pielotopica.booth.pm/items/4955538"
+          href={donationPageUrl}
           target="_blank"
           rel="noopener"
           underline="hover"
