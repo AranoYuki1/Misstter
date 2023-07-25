@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "watch": "NODE_OPTIONS='--openssl-legacy-provider' webpack --config webpack/webpack.dev.js --watch",
-    "build": "webpack --config webpack/webpack.prod.js",
+    "build": "NODE_OPTIONS='--openssl-legacy-provider' webpack --config webpack/webpack.prod.js",
     "clean": "rimraf dist",
     "test": "npx jest",
     "style": "prettier --write \"src/**/*.{ts,tsx}\""
