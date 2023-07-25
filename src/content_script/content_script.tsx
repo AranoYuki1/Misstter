@@ -173,6 +173,24 @@ const addMisskeyButton = (tweetBox: Node) => {
   tweetBox.parentElement!.insertBefore(misskeybutton, tweetBox.nextSibling);
 }
 
+// リプライボタンの文字列一覧
+const replyButtonLabels = [
+  "返信",
+  "Reply",
+  "답글",
+  "回复",
+  "回覆",
+  "Répondre",
+  "Responder",
+  "Antworten",
+  "Rispondi",
+  "Responder",
+  "Responder",
+  "Antwoorden",
+  "Svara",
+  "Svar",
+];
+
 const observer = new MutationObserver(mutations => {
   mutations.forEach(mutation => {
       if (mutation.type !== 'childList') return;
