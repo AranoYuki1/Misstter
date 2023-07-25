@@ -41,7 +41,13 @@ const Popup = () => {
     })
   }
 
-  const donationPageUrl = "https://pielotopica.booth.pm/items/4955538";
+  const openDonationPage = () => {
+    window.open(
+      "https://pielotopica.booth.pm/items/4955538",
+      "_blank",
+      "noreferrer"
+    );
+  };
   return (
     <>
       <AppBar position="static" sx={{ minWidth: 400 }}>
@@ -99,14 +105,18 @@ const Popup = () => {
           label={<Typography style={{ fontSize: 15 }}>Misskeyへの投稿にCWを設定する。</Typography>}          
         />
 
-        <Link
-          href={donationPageUrl}
-          target="_blank"
-          rel="noopener"
-          underline="hover"
-          sx={{ display: "block", mt: 2 }}
-        > 開発の支援をお願いします！ / Donation </Link>
-
+        <Typography
+          sx={{
+            display: "block",
+            color: "#1976d2",
+            mt: 2,
+            textDecoration: "none",
+            "&:hover": { textDecoration: "underline" },
+          }}
+          onClick={openDonationPage}
+        >
+          開発の支援をお願いします！ / Donation
+        </Typography>
       </Container>
 
     </>
