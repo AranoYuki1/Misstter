@@ -40,7 +40,7 @@ Misstter is Chrome addon to add misskey button on Twitter.
 
 ---
 
-## For Developers
+## 開発者へ / For Developers
 
 ## Prerequisites
 
