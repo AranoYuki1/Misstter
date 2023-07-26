@@ -24,6 +24,12 @@
   ],
 
   "web_accessible_resources": [
-    { "resources": ["misskey_icon.png"], "matches": ["https://twitter.com/*"] }
+    { 
+      "resources": [
+        "misskey_icon.png",
+        "pubilc_scope.svg"
+      ], 
+      "matches": ["https://twitter.com/*"] 
+    }
   ]
 }

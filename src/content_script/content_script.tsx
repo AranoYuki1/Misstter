@@ -1,136 +1,105 @@
-import { showNotification } from './notification'
+import { tweetToMisskey } from './tweetToMisskey';
+import { createScopeModal, Scope } from './createScopeModal';
+import { public_scope_icon, lock_scope_icon, home_scope_icon } from './svg_icons';
 
-const uploadImage = async (server: string, token: string, image: string) => {
-  console.log(image)
-  if (!image.startsWith("blob:")) return;
-  // get bolb from image
-  const blob = await (await fetch(image)).blob()
-
-  const formData  = new FormData();
-  // create UUID
-  const filename = `${Date.now()}.png`
-  formData.append('file', blob, `${filename}.png`);
-  formData.append('i', token);
-  formData.append('name', filename);
-
-  console.log(blob)
-
-  const res = await fetch(`${server}/api/drive/files/create`, {
-    method: 'POST',
-    body: formData,
-  })
-
-  const resJson = await res.json()
-  const fileID = resJson["id"]
-
-  return fileID
-}
-
-type PostOptions = {
-  cw: boolean,
-  token: string,
-  server: string
-}
- 
-export const postToMisskey = async (text: string, images: string[], options: PostOptions) => {
-  let fileIDs: string[] = []
-  if (images.length != 0) {
-    showNotification('Misskeyにファイルをアップロードしています...', 'success')
-    console.log(images)
-    fileIDs = await Promise.all(images.map(image => uploadImage(options.server, options.token, image) ))   
-  }
-
-  const body: any = { "i": options.token }
-  if (text) { body["text"] = text }
-  if (fileIDs.length > 0) { body["fileIds"] = fileIDs }
-  if (options.cw) { body["cw"] = "" }
-
-  try {
-    const res = await fetch(`${options.server}/api/notes/create`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', },
-      body: JSON.stringify(body),
-    })
-    if (res.status != 200) {
-      const errorRes = await res.json()
-      const message = errorRes["error"]["message"]
-      showNotification(`Misskeyへの投稿に失敗しました。${message}`, 'error')
-      return;
-    }
-    const resJson = await res.json()
-    console.log(resJson)
-
-    showNotification('Misskeyへの投稿に成功しました。', 'success')
-  } catch (e) {
-    showNotification('Misskeyへの投稿に失敗しました。', 'error')
-    return
-  }
-}
-
+const gifButtonSelector = 'div[data-testid="gifSearchButton"]'
 const buttonSelector = 'div[data-testid="tweetButton"], div[data-testid="tweetButtonInline"]'
 
-const getTweetText = () => {
-  const textContents = document.querySelectorAll('div[data-testid="tweetTextarea_0"] div[data-block="true"]');
-  if (!textContents) return;
-  const text = Array.from(textContents).map((textContent) => {
-    return textContent.textContent;
-  }).join('\n');
-
-  return text;
+const scopeModelHandler = (scope: Scope) => {
+  chrome.storage.sync.set({ misskey_scope: scope });
+  updateScopeButton(document.querySelector('.misskey-scope-button') as HTMLDivElement, scope);
 }
 
-const getTweetImages = () => {
-  const images = document.querySelectorAll("div[data-testid='attachments'] img");
-  const urls = Array.from(images).map((image) => {
-    return image.getAttribute('src');
-  })
-  // filter null
-  .filter((url) => {
-    return url != null;
-  })
-  return urls as string[];
+const scopeModel = createScopeModal(scopeModelHandler);
+
+const isShowingScopeModal = () => {
+  return document.body.contains(scopeModel);
 }
 
-const tweetAndMisskey = async () => {
-  const text = getTweetText();
-  const images = getTweetImages();
+const showScopeModal = (scopeButton: HTMLDivElement) => {
+  if (isShowingScopeModal()) return;
+  document.body.appendChild(scopeModel);
 
-  if (!text && images.length == 0) {
-    showNotification('Misskeyへの投稿内容がありません', 'error')
-    return;
-  }
+  // set position of modal
+  const rect = scopeButton.getBoundingClientRect();
+  scopeModel.style.top = `${rect.top + window.scrollY + 40}px`;
+  scopeModel.style.left = `${rect.left + window.scrollX - 83}px`;
 
-  const token = await new Promise<string>((resolve, reject) => {
-    chrome.storage.sync.get(['misskey_token'], (result) => {
-      const token = result.misskey_token as string;
-      if (!token) { 
-        showNotification('Tokenが設定されていません。', 'error')
-        reject()
-      } else { resolve(token) }
-    })
-  })
-
-  let server = await new Promise<string>((resolve, reject) => {
-    chrome.storage.sync.get(['misskey_server'], (result) => {
-      resolve(result.misskey_server ?? "https://misskey.io")
-    })
-  })
-
-  if (server.endsWith('/')) {
-    server = server.slice(0, -1)
-  }
-
-  const cw = await new Promise<boolean>((resolve, reject) => {
-    chrome.storage.sync.get(['misskey_cw'], (result) => {
-      resolve(result.misskey_cw ?? false)
-    })
+  // close modal when click outside
+  window.addEventListener('click', (e) => {
+    let target: any = e.target;
+    while (target) {
+      if (target === scopeButton) return;
+      target = target.parentNode;
+    }
+    closeScopeModal();
   });
-
-  const options = { cw, token, server }
-  await postToMisskey(text ?? "", images, options);
 }
 
-const addMisskeyButton = (tweetBox: Node) => {
+const closeScopeModal = () => {
+  if (!isShowingScopeModal()) return;
+
+  // animation
+  scopeModel.style.opacity = '0';
+  setTimeout(() => {
+    scopeModel.style.opacity = '1';
+    // remove modal
+    scopeModel.remove();
+  }, 200);
+}
+
+const updateScopeButton = (scopeButton: HTMLDivElement, scope: Scope) => {
+  if (scope === 'public') {
+    scopeButton.innerHTML = public_scope_icon;
+  } else if (scope === 'home') {
+    scopeButton.innerHTML = home_scope_icon;
+  } else {
+    scopeButton.innerHTML = lock_scope_icon;
+  }
+  (scopeButton.children[0] as any).style.fill = 'rgb(134, 179, 0)';
+}
+
+const createScopeButton = () => {
+  const scopeButton = document.createElement('div');
+
+  chrome.storage.sync.get(['misskey_scope'], (result) => {
+    const scope = result.misskey_scope;
+    updateScopeButton(scopeButton, scope);
+  });
+  
+  scopeButton.innerHTML = public_scope_icon;
+  (scopeButton.children[0] as any).style.fill = 'rgb(134, 179, 0)';
+  scopeButton.className = 'misskey-scope-button';
+  scopeButton.style.width = '34px';
+  scopeButton.style.height = '34px';
+  scopeButton.style.backgroundColor = 'transparent';
+  scopeButton.style.display = 'flex'
+  scopeButton.style.alignItems = 'center'
+  scopeButton.style.justifyContent = 'center'
+  scopeButton.style.borderRadius = '9999px';
+  scopeButton.style.cursor = 'pointer';
+  // animation settings
+  scopeButton.style.transition = 'background-color 0.2s ease-in-out';
+  scopeButton.onmouseover = () => {
+    scopeButton.style.backgroundColor = 'rgba(134, 179, 0, 0.1)';
+  }
+  scopeButton.onmouseout = () => {
+    scopeButton.style.backgroundColor = 'transparent';
+  }
+
+  scopeButton.onclick = () => {
+    if (isShowingScopeModal()) {
+      closeScopeModal();
+    } else {
+      showScopeModal(scopeButton);
+    }
+  }
+
+
+  return scopeButton;
+}
+
+const addMisskeyPostButton = (tweetBox: Node) => {
   const misskeyIcon = document.createElement('img')
   misskeyIcon.src = chrome.runtime.getURL('misskey_icon.png');
   misskeyIcon.style.width = '24px';
@@ -155,27 +124,30 @@ const addMisskeyButton = (tweetBox: Node) => {
   misskeybutton.style.justifyContent = 'center'
   misskeybutton.style.border = 'none'
   misskeybutton.onclick = () => {
-    // dim screen
     misskeybutton.disabled = true;
     misskeybutton.style.opacity = '0.5';
-    tweetAndMisskey()
+    tweetToMisskey()
       .then(() => {
         misskeybutton.style.opacity = '1';
         misskeybutton.disabled = false;
       })
   }
-  // hoverで色をかえる
   misskeybutton.onmouseover = () => {
     misskeybutton.style.backgroundColor = 'rgb(100, 134, 0)';
   }
   misskeybutton.onmouseout = () => {
     misskeybutton.style.backgroundColor = 'rgb(134, 179, 0)';
   }
-  // アニメーションを有効にする。
   misskeybutton.style.transition = 'background-color 0.2s ease-in-out';
   
   tweetBox.parentElement!.insertBefore(misskeybutton, tweetBox.nextSibling);
+
+  // add post filter button
+  const iconsBlock = document.querySelector(gifButtonSelector)?.parentElement
+  if (!iconsBlock) return;
+  iconsBlock.appendChild(createScopeButton())
 }
+
 
 // リプライボタンの文字列一覧
 const replyButtonLabels = [
@@ -204,11 +176,10 @@ const observer = new MutationObserver(mutations => {
             if (!tweetBox) return;
 
             // リプライボタンの場合は後続の処理を行わない
-            const isReplyButton =
-              replyButtonLabels.indexOf(tweetBox.innerText) !== -1;
+            const isReplyButton = replyButtonLabels.indexOf(tweetBox.innerText) !== -1;
             if (isReplyButton) return;
 
-            addMisskeyButton(tweetBox);
+            addMisskeyPostButton(tweetBox);
           }
       });
   });
