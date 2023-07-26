@@ -1,18 +1,6 @@
 # Misstter
 
-Misstter is Chrome addon to add misskey button on Twitter.
-
-## How to Install
-
-1. Go to the [release page](https://github.com/AranoYuki1/Misstter/releases) and download the latest version.
-2. Download `Misstter.zip`. 
-3. Unzip `Misstter.zip`
-4. Open [chrome://extensions/](chrome://extensions/)
-5. Activate "Developer Mode"
-6. Load extension from "Load Unpacked"
-7. Enter misskey token in Extension Popup
-
----
+MisstterはTwitterにMisskeyへの投稿ボタンを追加するChrome拡張です。
 
 ## インストール方法
 1. [リリースページ](https://github.com/AranoYuki1/Misstter/releases)から最新版をダウンロード
@@ -32,6 +20,27 @@ Misstter is Chrome addon to add misskey button on Twitter.
 作者が確認していますので、マルウェアが入ることはほとんどないはずですが、リスクをご承知の上でご使用ください。
 
 現在Chromeストアに公開のための審査中です。不安がある方はChromeストアでの公開までお待ちください。
+
+---
+
+# Misstter 
+
+Misstter is Chrome addon to add misskey button on Twitter.
+
+## How to Install
+
+1. Go to the [release page](https://github.com/AranoYuki1/Misstter/releases) and download the latest version.
+2. Download `Misstter.zip`. 
+3. Unzip `Misstter.zip`
+4. Open [chrome://extensions/](chrome://extensions/)
+5. Activate "Developer Mode"
+6. Load extension from "Load Unpacked"
+7. Enter misskey token in Extension Popup
+
+
+---
+
+## For Developers
 
 ## Prerequisites
 
