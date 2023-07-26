@@ -173,15 +173,38 @@ const addMisskeyButton = (tweetBox: Node) => {
   tweetBox.parentElement!.insertBefore(misskeybutton, tweetBox.nextSibling);
 }
 
+// リプライボタンの文字列一覧
+const replyButtonLabels = [
+  "返信",
+  "Reply",
+  "답글",
+  "回复",
+  "回覆",
+  "Répondre",
+  "Responder",
+  "Antworten",
+  "Rispondi",
+  "Responder",
+  "Responder",
+  "Antwoorden",
+  "Svara",
+  "Svar",
+];
+
 const observer = new MutationObserver(mutations => {
   mutations.forEach(mutation => {
       if (mutation.type !== 'childList') return;
       mutation.addedNodes.forEach((node: any) => {
           if (node.nodeType === Node.ELEMENT_NODE) {
-              const tweetBox = node.querySelector(buttonSelector);
-              if (!tweetBox) return;
-              if (tweetBox.innerText === '返信' || tweetBox.innerText === 'Reply' || tweetBox.innerText === '답글' || tweetBox.innerText === '回复' || tweetBox.innerText === '回覆' || tweetBox.innerText === 'Répondre' || tweetBox.innerText === 'Responder' || tweetBox.innerText === 'Antworten' || tweetBox.innerText === 'Rispondi' || tweetBox.innerText === 'Responder' || tweetBox.innerText === 'Responder' || tweetBox.innerText === 'Antwoorden' || tweetBox.innerText === 'Svara' || tweetBox.innerText === 'Svar') return;
-              addMisskeyButton(tweetBox);
+            const tweetBox = node.querySelector(buttonSelector);
+            if (!tweetBox) return;
+
+            // リプライボタンの場合は後続の処理を行わない
+            const isReplyButton =
+              replyButtonLabels.indexOf(tweetBox.innerText) !== -1;
+            if (isReplyButton) return;
+
+            addMisskeyButton(tweetBox);
           }
       });
   });
