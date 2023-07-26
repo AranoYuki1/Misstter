@@ -92,22 +92,7 @@ const addMisskeyPostButton = (tweetBox: Node) => {
 
 
 // リプライボタンの文字列一覧
-const replyButtonLabels = [
-  "返信",
-  "Reply",
-  "답글",
-  "回复",
-  "回覆",
-  "Répondre",
-  "Responder",
-  "Antworten",
-  "Rispondi",
-  "Responder",
-  "Responder",
-  "Antwoorden",
-  "Svara",
-  "Svar",
-];
+const replyButtonLabels = [ "返信", "Reply", "답글", "回复", "回覆", "Répondre", "Responder", "Antworten", "Rispondi", "Responder", "Responder", "Antwoorden", "Svara", "Svar" ];
 
 const observer = new MutationObserver(mutations => {
   mutations.forEach(mutation => {
