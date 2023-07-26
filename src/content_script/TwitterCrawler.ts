@@ -1,6 +1,6 @@
-import { postToMisskey } from './misskey_api'
-import { showNotification } from './notification'
-import { Scope } from './createScopeModal'; 
+import { postToMisskey } from './MisskeyAPI'
+import { showNotification } from './Notification'
+import { Scope } from './ScopeModal'; 
 
 const getTweetText = () => {
   const textContents = document.querySelectorAll('div[data-testid="tweetTextarea_0"] div[data-block="true"]');

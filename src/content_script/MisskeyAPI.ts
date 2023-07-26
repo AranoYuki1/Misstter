@@ -1,5 +1,5 @@
-import { showNotification } from "./notification"
-import { Scope } from "./createScopeModal"
+import { showNotification } from "./Notification"
+import { Scope } from "./ScopeModal"
 
 const uploadImage = async (server: string, token: string, image: string) => {
   console.log(image)

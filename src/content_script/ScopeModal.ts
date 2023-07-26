@@ -1,8 +1,8 @@
-import { public_scope_icon, home_scope_icon, lock_scope_icon, modal_pin_icon } from "./svg_icons"
+import { public_scope_icon, home_scope_icon, lock_scope_icon, modal_pin_icon } from "./Icons"
 
 export type Scope = 'public' | 'home' | 'followers';
 
-export const createScopeModal = (callback: (scope: Scope) => void) => {
+const createScopeModal = (callback: (scope: Scope) => void) => {
   const modal = document.createElement('div');
   modal.style.position = 'absolute';
   modal.style.width = '200px';
@@ -137,4 +137,63 @@ export const createScopeModal = (callback: (scope: Scope) => void) => {
 
   modal.appendChild(modal_content);
   return modal
+}
+
+const scopeModelHandler = (scope: Scope) => {
+  chrome.storage.sync.set({ misskey_scope: scope });
+  document.querySelectorAll('.misskey-scope-button').forEach((button) => {
+    updateScopeButton(button as HTMLDivElement, scope);
+  });
+}
+
+// Global scope modal
+const scopeModel = createScopeModal(scopeModelHandler);
+
+export const showScopeModal = (scopeButton: HTMLDivElement) => {
+  if (isShowingScopeModal()) return;
+  document.body.appendChild(scopeModel);
+
+  // set position of modal
+  const rect = scopeButton.getBoundingClientRect();
+  scopeModel.style.top = `${rect.top + window.scrollY + 40}px`;
+  scopeModel.style.left = `${rect.left + window.scrollX - 83}px`;
+}
+
+export const isShowingScopeModal = () => {
+  return document.body.contains(scopeModel);
+}
+
+const handleDocumentClick = (e: MouseEvent) => {
+  let target: any = e.target;
+  while (target) {
+    if (target.className === "misskey-scope-button") return;
+    target = target.parentNode;
+  }
+  closeScopeModal();
+}
+
+window.addEventListener('click', handleDocumentClick);
+
+
+export const closeScopeModal = () => {
+  if (!isShowingScopeModal()) return;
+
+  // animation
+  scopeModel.style.opacity = '0';
+  setTimeout(() => {
+    scopeModel.style.opacity = '1';
+    // remove modal
+    scopeModel.remove();
+  }, 200);
+}
+
+export const updateScopeButton = (scopeButton: HTMLDivElement, scope: Scope) => {
+  if (scope === 'public') {
+    scopeButton.innerHTML = public_scope_icon;
+  } else if (scope === 'home') {
+    scopeButton.innerHTML = home_scope_icon;
+  } else {
+    scopeButton.innerHTML = lock_scope_icon;
+  }
+  (scopeButton.children[0] as any).style.fill = 'rgb(134, 179, 0)';
 }
