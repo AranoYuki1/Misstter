@@ -6,19 +6,6 @@ Misstter is Chrome addon to add misskey button on Twitter.
 
 * [node + npm](https://nodejs.org/) (Current Version)
 
-## Includes the following
-
-* TypeScript
-* Webpack
-* React
-* Jest
-* Example Code
-    * Chrome Storage
-    * Options Version 2
-    * content script
-    * count up badge number
-    * background
-
 ## Setup
 
 ```
