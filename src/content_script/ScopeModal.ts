@@ -140,6 +140,7 @@ const createScopeModal = (callback: (scope: Scope) => void) => {
 }
 
 const scopeModelHandler = (scope: Scope) => {
+  console.log(scope);
   chrome.storage.sync.set({ misskey_scope: scope });
   document.querySelectorAll('.misskey-scope-button').forEach((button) => {
     updateScopeButton(button as HTMLDivElement, scope);
