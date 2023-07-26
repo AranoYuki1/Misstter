@@ -11,7 +11,7 @@ export const showNotification = (text: string, type: NotificationType) => {
   if (type === 'success') {
     notification.style.backgroundColor = 'rgb(134, 179, 0)';
   } else if (type === 'error') {
-    notification.style.backgroundColor = 'rgb(255, 0, 0)';
+    notification.style.backgroundColor = 'rgb(211, 30, 30)';
   } 
 
   notification.style.color = 'white';

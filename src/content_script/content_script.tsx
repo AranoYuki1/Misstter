@@ -70,8 +70,12 @@ export const postToMisskey = async (text: string, images: string[], options: Pos
 const buttonSelector = 'div[data-testid="tweetButton"], div[data-testid="tweetButtonInline"]'
 
 const getTweetText = () => {
-  const tweetBox = document.querySelector('div[data-testid="tweetTextarea_0"]') as HTMLTextAreaElement;
-  const text = tweetBox.textContent;
+  const textContents = document.querySelectorAll('div[data-testid="tweetTextarea_0"] div[data-block="true"]');
+  if (!textContents) return;
+  const text = Array.from(textContents).map((textContent) => {
+    return textContent.textContent;
+  }).join('\n');
+
   return text;
 }
 
