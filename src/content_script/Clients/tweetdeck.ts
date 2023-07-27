@@ -1,8 +1,9 @@
-import { tweetToMisskey } from '../System/TwitterCrawler';
 import { REPLY_BUTTON_LABELS } from '../../common/Constants';
 import { createScopeButton, scopeButtonClassName } from "../UI/ScopeButton"
 import { createMisskeyPostButton, misskeyButtonClassName, syncDisableState } from "../UI/MisskeyPostButton"
 import { createMisskeyImageOptionButton } from "../UI/ImageFlagButton"
+// DeckではTwitterCrawlerがそのまま使用可能
+import { tweetToMisskey } from '../System/TwitterCrawler';
 
 // ミスキーへの投稿ボタンを追加する
 const addMisskeyPostButton = (tweetButton: HTMLElement, tweetBox: HTMLElement) => {
