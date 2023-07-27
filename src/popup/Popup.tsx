@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import ReactDOM from "react-dom"
-import { Container, Typography, AppBar, Toolbar, TextField, Link, FormControlLabel, Checkbox } from "@mui/material"
+import { Container, Typography, AppBar, Toolbar, TextField, FormControlLabel, Checkbox } from "@mui/material"
 import { DEFAULT_INSTANCE_URL } from "../common/constants";
 
 const Popup = () => {
