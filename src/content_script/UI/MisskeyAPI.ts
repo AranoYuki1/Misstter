@@ -25,9 +25,12 @@ const uploadImage = async (image: Image, options: PostOptions) => {
   formData.append('file', blob, `${filename}.png`);
   formData.append('i', options.token);
   formData.append('name', filename);
+  console.log(options.sensitive, image.isSensitive)
   if (options.sensitive || image.isSensitive) {
     formData.append('isSensitive', "true");
   }
+
+  console.log(formData)
 
   const res = await fetch(`${options.server}/api/drive/files/create`, {
     method: 'POST',
@@ -39,7 +42,6 @@ const uploadImage = async (image: Image, options: PostOptions) => {
 
   return fileID
 }
-
 
 export const postToMisskey = async (text: string, images: Image[], options: PostOptions) => {
   let fileIDs: string[] = []
@@ -67,7 +69,6 @@ export const postToMisskey = async (text: string, images: Image[], options: Post
       showNotification(`Misskeyへの投稿に失敗しました。${message}`, 'error')
       return;
     }
-    const resJson = await res.json()
     showNotification('Misskeyへの投稿に成功しました。', 'success')
   } catch (e) {
     showNotification('Misskeyへの投稿に失敗しました。', 'error')

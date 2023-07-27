@@ -22,11 +22,14 @@ const getTweetImages: () => Image[] = () => {
   for (const image of images) {
     const imageRoot = image.parentElement?.parentElement?.parentElement?.parentElement
     const flagButton = imageRoot?.querySelector(`.${misskeyFlagClassName}`)
+    console.log("flagButton", flagButton)
     const isFlagged = flagButton?.getAttribute(misskeyFlagAttribute) === "true" ?? false
     const url = image.getAttribute('src')
     if (!url) continue;
     res.push({ url: url, isSensitive: isFlagged })
   }
+
+  console.log(res)
 
   return res;
 }
