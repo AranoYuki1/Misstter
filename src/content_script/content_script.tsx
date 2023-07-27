@@ -1,5 +1,6 @@
 import { tweetToMisskey } from './TwitterCrawler';
 import { isShowingScopeModal, showScopeModal, closeScopeModal, updateScopeButton } from './ScopeModal';
+import { REPLY_BUTTON_LABELS } from '../common/constants';
 
 const gifButtonSelector = 'div[data-testid="gifSearchButton"]'
 const buttonSelector = 'div[data-testid="tweetButton"], div[data-testid="tweetButtonInline"]'
@@ -90,10 +91,6 @@ const addMisskeyPostButton = (tweetBox: Node) => {
   iconsBlock.appendChild(createScopeButton())
 }
 
-
-// リプライボタンの文字列一覧
-const replyButtonLabels = [ "返信", "Reply", "답글", "回复", "回覆", "Répondre", "Responder", "Antworten", "Rispondi", "Responder", "Responder", "Antwoorden", "Svara", "Svar" ];
-
 const observer = new MutationObserver(mutations => {
   mutations.forEach(mutation => {
       if (mutation.type !== 'childList') return;
@@ -103,7 +100,7 @@ const observer = new MutationObserver(mutations => {
             if (!tweetBox) return;
 
             // リプライボタンの場合は後続の処理を行わない
-            const isReplyButton = replyButtonLabels.indexOf(tweetBox.innerText) !== -1;
+            const isReplyButton = REPLY_BUTTON_LABELS.indexOf(tweetBox.innerText) !== -1;
             if (isReplyButton) return;
 
             addMisskeyPostButton(tweetBox);
