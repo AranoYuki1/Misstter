@@ -184,7 +184,7 @@ const foundTweetButtonHandler = (tweetButton: HTMLElement) => {
   if (!tweetButton) return;
 
   // リプライボタンの場合は後続の処理を行わない
-  const isReplyButton = replyButtonLabels.indexOf(tweetButton.innerText) !== -1;
+  const isReplyButton = REPLY_BUTTON_LABELS.indexOf(tweetButton.innerText) !== -1;
   if (isReplyButton) return;
 
   // add misskey post button
@@ -213,11 +213,7 @@ const observer = new MutationObserver(mutations => {
         
         const tweetButton = node.querySelector(buttonSelector);
         if (tweetButton) { 
-          // リプライボタンの場合は後続の処理を行わない
-          const isReplyButton = REPLY_BUTTON_LABELS.indexOf(tweetBox.innerText) !== -1;
-          if (isReplyButton) return;
           foundTweetButtonHandler(tweetButton); 
-          return;
         }
         
         const attachmentsImages = document.querySelectorAll(attachmentsImageSelector);
