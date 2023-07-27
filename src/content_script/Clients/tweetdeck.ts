@@ -11,6 +11,9 @@ const addMisskeyPostButton = (tweetButton: HTMLElement, tweetBox: HTMLElement) =
   if (tweetBox.querySelector(`.${misskeyButtonClassName}`)) return;
 
   const misskeybutton = createMisskeyPostButton(tweetToMisskey);  
+  misskeybutton.style.width = "40px"
+  misskeybutton.style.height = "30px"
+  misskeybutton.style.marginLeft = "8px"
   tweetBox.appendChild(misskeybutton);
   syncDisableState(tweetButton, misskeybutton);
 }

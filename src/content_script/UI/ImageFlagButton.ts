@@ -20,7 +20,7 @@ export const createMisskeyImageOptionButton = () => {
   misskeybutton.style.alignItems = 'center'
   misskeybutton.style.justifyContent = 'center'
   misskeybutton.style.cursor = 'pointer';
-  misskeybutton.style.border = "solid 1px rgb(167, 217, 18)";
+  misskeybutton.style.border = "solid 1px rgb(134, 179, 0)";
 
   misskeybutton.onclick = () => {
     if (misskeybutton.getAttribute(misskeyFlagAttribute) === 'true') {
@@ -28,7 +28,7 @@ export const createMisskeyImageOptionButton = () => {
       misskeybutton.style.backgroundColor = 'rgba(15, 20, 25, 0.75)';
     } else {
       misskeybutton.setAttribute(misskeyFlagAttribute, 'true');
-      misskeybutton.style.backgroundColor = 'rgb(167, 217, 18)';
+      misskeybutton.style.backgroundColor = 'rgb(134, 179, 0)';
     }
   }
 

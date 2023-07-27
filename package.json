@@ -4,8 +4,10 @@
   "description": "Misstter",
   "main": "index.js",
   "scripts": {
-    "watch": "webpack --config webpack/webpack.dev.js --watch",
-    "build": "webpack --config webpack/webpack.prod.js",
+    "watch_chrome": "webpack --config webpack/webpack.dev.chrome.js --watch",
+    "build_chrome": "webpack --config webpack/webpack.prod.chrome.js",
+    "watch_firefox": "webpack --config webpack/webpack.dev.firefox.js --watch",
+    "build_firefox": "webpack --config webpack/webpack.prod.firefox.js",
     "clean": "rimraf dist",
     "test": "npx jest",
     "style": "prettier --write \"src/**/*.{ts,tsx}\""
