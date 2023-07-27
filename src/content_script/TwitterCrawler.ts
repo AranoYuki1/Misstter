@@ -1,3 +1,4 @@
+import { DEFAULT_INSTANCE_URL } from '../common/constants';
 import { postToMisskey, Image } from './MisskeyAPI'
 import { showNotification } from './Notification'
 import { Scope } from './ScopeModal'; 
@@ -44,7 +45,7 @@ const getToken = async () => {
 const getServer = async () => {
   return await new Promise<string>((resolve, reject) => {
     chrome.storage.sync.get(['misskey_server'], (result) => {
-      let server = result.misskey_server ?? "https://misskey.io";
+      let server = result.misskey_server ?? DEFAULT_INSTANCE_URL;
       if (server.endsWith('/')) {
         server = server.slice(0, -1)
       }

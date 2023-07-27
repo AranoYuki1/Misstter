@@ -1,6 +1,7 @@
 import { tweetToMisskey } from './TwitterCrawler';
 import { flag_icon } from './Icons'
 import { isShowingScopeModal, showScopeModal, closeScopeModal, updateScopeButton } from './ScopeModal';
+import { REPLY_BUTTON_LABELS } from '../common/constants';
 
 const gifButtonSelector = 'div[data-testid="gifSearchButton"]'
 const buttonSelector = 'div[data-testid="tweetButton"], div[data-testid="tweetButtonInline"]'
@@ -179,10 +180,6 @@ const addMisskeyImageOptionButton = (editButton: HTMLElement, attachmentsImage: 
 
 }
 
-
-// リプライボタンの文字列一覧
-const replyButtonLabels = [ "返信", "Reply", "답글", "回复", "回覆", "Répondre", "Responder", "Antworten", "Rispondi", "Responder", "Responder", "Antwoorden", "Svara", "Svar" ];
-
 const foundTweetButtonHandler = (tweetButton: HTMLElement) => {
   if (!tweetButton) return;
 
@@ -215,8 +212,14 @@ const observer = new MutationObserver(mutations => {
         if (node.nodeType !== Node.ELEMENT_NODE) return;
         
         const tweetButton = node.querySelector(buttonSelector);
-        if (tweetButton) { foundTweetButtonHandler(tweetButton); }
-
+        if (tweetButton) { 
+          // リプライボタンの場合は後続の処理を行わない
+          const isReplyButton = REPLY_BUTTON_LABELS.indexOf(tweetBox.innerText) !== -1;
+          if (isReplyButton) return;
+          foundTweetButtonHandler(tweetButton); 
+          return;
+        }
+        
         const attachmentsImages = document.querySelectorAll(attachmentsImageSelector);
         if (attachmentsImages) { 
           attachmentsImages.forEach((attachmentsImage: any) => {

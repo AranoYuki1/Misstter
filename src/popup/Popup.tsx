@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react"
 import ReactDOM from "react-dom"
-import { Container, Typography, AppBar, Toolbar, TextField, Link, FormControlLabel, Checkbox } from "@mui/material"
+import { Container, Typography, AppBar, Toolbar, TextField, FormControlLabel, Checkbox } from "@mui/material"
+import { DEFAULT_INSTANCE_URL } from "../common/constants";
 
 const Popup = () => {
   const [token, setToken] = useState<string | null>(null)
-  const [server, setServer] = useState<string | null>("https://misskey.io")
+  const [server, setServer] = useState<string | null>(DEFAULT_INSTANCE_URL);
   const [cw, setCw] = useState<boolean | null>(null)
   const [sensitive, setSensitive] = useState<boolean | null>(null)
   const [showAccess, setShowAccess] = useState<boolean|null>(null)
@@ -65,7 +66,7 @@ const Popup = () => {
 
         <TextField  
           label="Server URL"
-          placeholder="https://misskey.io"
+          placeholder={DEFAULT_INSTANCE_URL}
           value={server}
           variant="outlined"
           fullWidth
