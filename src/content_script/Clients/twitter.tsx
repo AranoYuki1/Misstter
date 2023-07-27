@@ -1,5 +1,3 @@
-import browser from 'webextension-polyfill';
-
 import { tweetToMisskey } from '../System/TwitterCrawler';
 import { REPLY_BUTTON_LABELS } from '../../common/Constants';
 import { createScopeButton, scopeButtonClassName } from "../UI/ScopeButton"
@@ -23,11 +21,8 @@ const addMisskeyPostButton = (tweetButton: HTMLElement, tweetBox: HTMLElement) =
   // すでにボタンがある場合は何もしない
   if (tweetBox.querySelector(`.${misskeyButtonClassName}`)) return;
 
-  // const misskeybutton = createMisskeyPostButton(tweetToMisskey);  
-
-  const misskeybutton = createMisskeyPostButton(async () => {
-    await browser.runtime.sendMessage({ type: 'post', message: "Hello World!!!" })
-  });  
+  const misskeybutton = createMisskeyPostButton(tweetToMisskey); 
+  
   tweetBox.appendChild(misskeybutton);
   syncDisableState(tweetButton, misskeybutton);
 }

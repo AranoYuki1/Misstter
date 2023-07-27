@@ -1,7 +1,9 @@
 export type Image = {
-  url: string,
+  blob: Blob,
   isSensitive: boolean
 }
+
+
 
 export type Scope = 'public' | 'home' | 'followers'
 
@@ -26,3 +28,8 @@ export type PostResponse = {
   errorMessage: string
 }
 
+export type Notification = {
+  type: 'notification',
+  message: string,
+  level: 'success' | 'error'
+}
