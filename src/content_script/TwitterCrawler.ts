@@ -1,3 +1,4 @@
+import { DEFAULT_INSTANCE_URL } from '../common/constants';
 import { postToMisskey } from './MisskeyAPI'
 import { showNotification } from './Notification'
 import { Scope } from './ScopeModal'; 
@@ -45,7 +46,7 @@ export const tweetToMisskey = async () => {
 
   let server = await new Promise<string>((resolve, reject) => {
     chrome.storage.sync.get(['misskey_server'], (result) => {
-      resolve(result.misskey_server ?? "https://misskey.io")
+      resolve(result.misskey_server ?? DEFAULT_INSTANCE_URL);
     })
   })
 
