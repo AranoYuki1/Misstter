@@ -1,10 +1,13 @@
 import { tweetToMisskey } from './TwitterCrawler';
+import { flag_icon } from './Icons'
 import { isShowingScopeModal, showScopeModal, closeScopeModal, updateScopeButton } from './ScopeModal';
 
 const gifButtonSelector = 'div[data-testid="gifSearchButton"]'
 const buttonSelector = 'div[data-testid="tweetButton"], div[data-testid="tweetButtonInline"]'
+const attachmentsImageSelector = 'div[data-testid="attachments"] div[role="group"]'
 const misskeyButtonClassName = 'misskey-button'
 const scopeButtonClassName = 'misskey-scope-button'
+const misskeyFlagClassName = 'misskey-flag'
 
 // スコープボタンを作成する
 const addScopeButton = (iconBox: HTMLElement) => {
@@ -59,7 +62,7 @@ const addScopeButton = (iconBox: HTMLElement) => {
 }
 
 // ミスキーへの投稿ボタンを追加する
-const addMisskeyPostButton = (tweetBox: HTMLElement) => {
+const addMisskeyPostButton = (tweetButton: HTMLElement, tweetBox: HTMLElement) => {
   // すでにボタンがある場合は何もしない
   if (tweetBox.querySelector(`.${misskeyButtonClassName}`)) return;
 
@@ -76,7 +79,6 @@ const addMisskeyPostButton = (tweetBox: HTMLElement) => {
   misskeybutton.className = misskeyButtonClassName;
   misskeybutton.style.backgroundColor = 'rgb(134, 179, 0)';
   misskeybutton.style.borderRadius = '9999px';
-  misskeybutton.style.cursor = 'pointer';
   misskeybutton.style.height = '36px';
   misskeybutton.style.width = '36px';
   misskeybutton.style.marginLeft = '8px';
@@ -104,35 +106,123 @@ const addMisskeyPostButton = (tweetBox: HTMLElement) => {
   misskeybutton.style.transition = 'background-color 0.2s ease-in-out';
   
   tweetBox.appendChild(misskeybutton);
+
+  const syncOpacity = () => {
+    const isDisabled = parseFloat(window.getComputedStyle(tweetButton).opacity) != 1;
+    if (isDisabled) {
+      misskeybutton.disabled = true;
+      misskeybutton.style.opacity = '0.5';
+      misskeybutton.style.cursor = "default";
+    } else {
+      misskeybutton.disabled = false;
+      misskeybutton.style.opacity = '1';
+      misskeybutton.style.cursor = 'pointer';
+    }
+  }
+
+  const observer = new MutationObserver(mutations => {
+    mutations.forEach(mutation => {
+        if (mutation.type !== 'attributes') return;
+        if (mutation.attributeName !== 'class') return;
+        syncOpacity();
+    });
+  })
+
+  syncOpacity();
+
+  observer.observe(tweetButton, { attributes: true });
+}
+
+const addMisskeyImageOptionButton = (editButton: HTMLElement, attachmentsImage: HTMLElement) => {
+  const misskeybutton = document.createElement('button');
+  misskeybutton.innerHTML = flag_icon;
+  misskeybutton.style.fill = 'rgb(255, 255, 255)';
+  misskeybutton.className = misskeyFlagClassName;
+  misskeybutton.style.backgroundColor = "rgba(15, 20, 25, 0.75)"
+  misskeybutton.style.backdropFilter = "blur(4px)"
+  misskeybutton.style.borderRadius = '9999px';
+  misskeybutton.style.height = '32px';
+  misskeybutton.style.width = '32px';
+  misskeybutton.style.marginLeft = '8px';
+  misskeybutton.style.marginRight = '8px';
+  misskeybutton.style.outline = 'none';
+  misskeybutton.style.display = 'flex'
+  misskeybutton.style.alignItems = 'center'
+  misskeybutton.style.justifyContent = 'center'
+  misskeybutton.style.cursor = 'pointer';
+  misskeybutton.style.border = "solid 1px rgb(167, 217, 18)";
+
+  misskeybutton.onclick = () => {
+    console.log('click');
+    if (misskeybutton.getAttribute('data-misskey-flag') === 'true') {
+      misskeybutton.setAttribute('data-misskey-flag', 'false');
+      misskeybutton.style.backgroundColor = 'rgba(15, 20, 25, 0.75)';
+    } else {
+      misskeybutton.setAttribute('data-misskey-flag', 'true');
+      misskeybutton.style.backgroundColor = 'rgb(167, 217, 18)';
+    }
+  }
+
+  misskeybutton.style.transition = 'background-color 0.2s ease-in-out';
+
+  misskeybutton.onmouseover = () => {
+    if (misskeybutton.getAttribute('data-misskey-flag') === 'true') return;
+    misskeybutton.style.backgroundColor = 'rgba(39, 44, 48, 0.75)';
+  }
+
+  misskeybutton.onmouseout = () => {
+    if (misskeybutton.getAttribute('data-misskey-flag') === 'true') return;
+    misskeybutton.style.backgroundColor = 'rgba(15, 20, 25, 0.75)';
+  }
+
+  editButton.parentElement!.insertBefore(misskeybutton, editButton);
+
 }
 
 
 // リプライボタンの文字列一覧
 const replyButtonLabels = [ "返信", "Reply", "답글", "回复", "回覆", "Répondre", "Responder", "Antworten", "Rispondi", "Responder", "Responder", "Antwoorden", "Svara", "Svar" ];
 
+const foundTweetButtonHandler = (tweetButton: HTMLElement) => {
+  if (!tweetButton) return;
+
+  // リプライボタンの場合は後続の処理を行わない
+  const isReplyButton = replyButtonLabels.indexOf(tweetButton.innerText) !== -1;
+  if (isReplyButton) return;
+
+  // add misskey post button
+  const tweetBox = tweetButton.parentElement as HTMLElement;
+  if (tweetBox) { addMisskeyPostButton(tweetButton, tweetBox); }
+
+  // add scope button
+  const iconsBlock = document.querySelector(gifButtonSelector)?.parentElement as HTMLElement
+  if (iconsBlock) { addScopeButton(iconsBlock); }
+}
+
+const foundAttachmentsImageHandler = (attachmentsImage: HTMLElement) => {
+  if (attachmentsImage.attributes.getNamedItem('data-misskey-attachments-image')) return;
+  attachmentsImage.attributes.setNamedItem(document.createAttribute('data-misskey-attachments-image'));
+  const editButton = Array.from(attachmentsImage.querySelectorAll("div[role='button']"))[1] as HTMLElement;
+  if (!editButton) return;
+
+  addMisskeyImageOptionButton(editButton, attachmentsImage);
+}
+
 const observer = new MutationObserver(mutations => {
   mutations.forEach(mutation => {
       if (mutation.type !== 'childList') return;
       mutation.addedNodes.forEach((node: any) => {
-          if (node.nodeType === Node.ELEMENT_NODE) {
-            const tweetButton = node.querySelector(buttonSelector);
-            if (!tweetButton) return;
+        if (node.nodeType !== Node.ELEMENT_NODE) return;
+        
+        const tweetButton = node.querySelector(buttonSelector);
+        if (tweetButton) { foundTweetButtonHandler(tweetButton); }
 
-            // リプライボタンの場合は後続の処理を行わない
-            const isReplyButton = replyButtonLabels.indexOf(tweetButton.innerText) !== -1;
-            if (isReplyButton) return;
-
-            // add misskey post button
-            const tweetBox = tweetButton.parentElement as HTMLElement;
-            if (tweetBox) {
-              addMisskeyPostButton(tweetBox);
-            }
-
-            const iconsBlock = document.querySelector(gifButtonSelector)?.parentElement as HTMLElement
-            if (iconsBlock) {
-              addScopeButton(iconsBlock);
-            }
-          }
+        const attachmentsImages = document.querySelectorAll(attachmentsImageSelector);
+        if (attachmentsImages) { 
+          attachmentsImages.forEach((attachmentsImage: any) => {
+            foundAttachmentsImageHandler(attachmentsImage); 
+          })
+        }
       });
   });
 });

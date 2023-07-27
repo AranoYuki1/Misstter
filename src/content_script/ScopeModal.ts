@@ -79,7 +79,9 @@ const createScopeModal = (callback: (scope: Scope) => void) => {
   </style>
 
   <ul class='misskey_access_scope'>
-    <h5>公開範囲</h5>
+    <h5>
+      公開範囲 <span style='font-size: 12px; color: rgb(101, 119, 134);'> (Misskey) </span>
+    </h5>
 
     <li selcted>
       ${public_scope_icon}
@@ -147,7 +149,6 @@ const createScopeModal = (callback: (scope: Scope) => void) => {
 }
 
 const scopeModelHandler = (scope: Scope) => {
-  console.log(scope);
   chrome.storage.sync.set({ misskey_scope: scope });
   document.querySelectorAll('.misskey-scope-button').forEach((button) => {
     updateScopeButton(button as HTMLDivElement, scope);

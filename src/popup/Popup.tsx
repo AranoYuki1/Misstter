@@ -114,7 +114,7 @@ const Popup = () => {
             }
             }
           />}
-          label={<Typography style={{ fontSize: 15 }}>Misskeyへの投稿にNSFWを設定する。</Typography>}
+          label={<Typography style={{ fontSize: 15 }}>投稿する全ての画像にNSFWを設定する。</Typography>}
         />
 
         <FormControlLabel

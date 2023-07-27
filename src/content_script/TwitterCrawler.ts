@@ -1,4 +1,4 @@
-import { postToMisskey } from './MisskeyAPI'
+import { postToMisskey, Image } from './MisskeyAPI'
 import { showNotification } from './Notification'
 import { Scope } from './ScopeModal'; 
 
@@ -12,17 +12,21 @@ const getTweetText = () => {
   return text;
 }
 
-const getTweetImages = () => {
+const getTweetImages: () => Image[] = () => {
   const images = document.querySelectorAll("div[data-testid='attachments'] img");
-  const urls = Array.from(images).map((image) => {
-    return image.getAttribute('src');
-  })
-  // filter null
-  .filter((url) => {
-    return url != null 
-  })
 
-  return urls as string[];
+  const res: Image[] = []
+
+  for (const image of images) {
+    const imageRoot = image.parentElement?.parentElement?.parentElement?.parentElement
+    const flagButton = imageRoot?.querySelector(".misskey-flag")
+    const isFlagged = flagButton?.getAttribute("data-misskey-flag") === "true" ?? false
+    const url = image.getAttribute('src')
+    if (!url) continue;
+    res.push({ url: url, isSensitive: isFlagged })
+  }
+
+  return res;
 }
 
 const getToken = async () => {
