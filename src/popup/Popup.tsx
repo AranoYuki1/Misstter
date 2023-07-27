@@ -5,40 +5,41 @@ import { Container, Typography, AppBar, Toolbar, TextField, Link, FormControlLab
 const Popup = () => {
   const [token, setToken] = useState<string | null>(null)
   const [server, setServer] = useState<string | null>("https://misskey.io")
-  const [cw, setCw] = useState<boolean>(false)
+  const [cw, setCw] = useState<boolean | null>(null)
+  const [sensitive, setSensitive] = useState<boolean | null>(null)
+  const [showAccess, setShowAccess] = useState<boolean|null>(null)
 
   useEffect(() => {
-    chrome.storage.sync.get(['misskey_token', 'misskey_server', 'misskey_cw'], (result) => {
-      const token = result.misskey_token;
-      const server = result.misskey_server;
-      const cw = result.misskey_cw;
-
-      if (token) { setToken(token) }
-      if (server) { setServer(server) }
-      if (cw) { setCw(cw) }
+    chrome.storage.sync.get(['misskey_token', 'misskey_server', 'misskey_cw', 'misskey_sensitive', 'misskey_access'], (result) => {
+      const token = result.misskey_token; if (token) { setToken(token) }
+      const server = result.misskey_server; if (server) { setServer(server) }
+      setCw(result.misskey_cw)
+      setSensitive(result.misskey_sensitive)
+      setShowAccess(result.misskey_access)
     })
   }, [])
   
   const updateToken = (token: string) => {
-    chrome.storage.sync.set({ misskey_token: token }, () => {
-      console.log('Token saved');
-    });
     setToken(token)
+    chrome.storage.sync.set({ misskey_token: token });
   }
   const updateServer = (server: string) => {
     setServer(server)
-    if (!server.startsWith('https://')) {
-      server = 'https://' + server
-    }
-    chrome.storage.sync.set({ misskey_server: server }, () => {
-      console.log('Server saved');
-    });
+    if (!server.startsWith('https://')) { server = 'https://' + server }
+    if (server.endsWith('/')) { server = server.slice(0, -1) }
+    chrome.storage.sync.set({ misskey_server: server });
   }
   const updateCw = (cw: boolean) => {
     setCw(cw)
-    chrome.storage.sync.set({ misskey_cw: cw }, () => {
-      console.log('CW saved');
-    })
+    chrome.storage.sync.set({ misskey_cw: cw })
+  }
+  const updateSensitive = (sensitive: boolean) => {
+    setSensitive(sensitive)
+    chrome.storage.sync.set({ misskey_sensitive: sensitive })
+  }
+  const updateAccess = (access: boolean) => {
+    setShowAccess(access)
+    chrome.storage.sync.set({ misskey_access: access })
   }
 
   const openDonationPage = () => {
@@ -97,12 +98,33 @@ const Popup = () => {
 
         <FormControlLabel 
           control={<Checkbox 
-            checked={cw}
+            checked={cw ?? false}
             onChange={(e) => {
               updateCw(e.target.checked)
             }}
           />}
           label={<Typography style={{ fontSize: 15 }}>Misskeyへの投稿にCWを設定する。</Typography>}          
+        />
+
+        <FormControlLabel
+          control={<Checkbox
+            checked={sensitive ?? false}
+            onChange={(e) => {
+              updateSensitive(e.target.checked)
+            }
+            }
+          />}
+          label={<Typography style={{ fontSize: 15 }}>Misskeyへの投稿にNSFWを設定する。</Typography>}
+        />
+
+        <FormControlLabel
+          control={<Checkbox
+            checked={showAccess ?? true}
+            onChange={(e) => {
+              updateAccess(e.target.checked)
+            }}
+          />}
+          label={<Typography style={{ fontSize: 15 }}>投稿の公開範囲設定ボタンを表示する。</Typography>}
         />
 
         <Typography

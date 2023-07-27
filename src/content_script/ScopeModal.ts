@@ -47,6 +47,7 @@ const createScopeModal = (callback: (scope: Scope) => void) => {
       align-items: center;
       padding: 8px;
       cursor: pointer;
+      transition: background-color 0.1s ease 0s;
     }
 
     .misskey_access_scope li:hover {
@@ -124,7 +125,7 @@ const createScopeModal = (callback: (scope: Scope) => void) => {
     });
   }
 
-  chrome.storage.sync.get(['misskey_scope'], (result) => {
+  const updateSelection = () => chrome.storage.sync.get(['misskey_scope'], (result) => {
     const scope = result.misskey_scope ?? "public";
     if (scope === 'public') {
       setModalSelection(0);
@@ -134,6 +135,12 @@ const createScopeModal = (callback: (scope: Scope) => void) => {
       setModalSelection(2);
     }
   });
+
+
+  setInterval(() => {
+    updateSelection();
+  }, 2000);
+  updateSelection();
 
   modal.appendChild(modal_content);
   return modal
@@ -151,8 +158,9 @@ const scopeModelHandler = (scope: Scope) => {
 const scopeModel = createScopeModal(scopeModelHandler);
 
 export const showScopeModal = (scopeButton: HTMLDivElement) => {
-  if (isShowingScopeModal()) return;
-  document.body.appendChild(scopeModel);
+  if (!isShowingScopeModal()) {
+    document.body.appendChild(scopeModel);
+  }
 
   // set position of modal
   const rect = scopeButton.getBoundingClientRect();

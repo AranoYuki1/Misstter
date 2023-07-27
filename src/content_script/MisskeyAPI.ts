@@ -1,7 +1,7 @@
 import { showNotification } from "./Notification"
 import { Scope } from "./ScopeModal"
 
-const uploadImage = async (server: string, token: string, image: string) => {
+const uploadImage = async (image: string, options: PostOptions) => {
   console.log(image)
   if (!image.startsWith("blob:")) return;
   // get bolb from image
@@ -11,12 +11,15 @@ const uploadImage = async (server: string, token: string, image: string) => {
   // create UUID
   const filename = `${Date.now()}.png`
   formData.append('file', blob, `${filename}.png`);
-  formData.append('i', token);
+  formData.append('i', options.token);
   formData.append('name', filename);
+  if (options.sensitive) {
+    formData.append('isSensitive', "true");
+  }
 
   console.log(blob)
 
-  const res = await fetch(`${server}/api/drive/files/create`, {
+  const res = await fetch(`${options.server}/api/drive/files/create`, {
     method: 'POST',
     body: formData,
   })
@@ -31,6 +34,7 @@ export type PostOptions = {
   cw: boolean,
   token: string,
   server: string,
+  sensitive: boolean,
   scope: Scope
 }
 
@@ -38,15 +42,14 @@ export const postToMisskey = async (text: string, images: string[], options: Pos
   let fileIDs: string[] = []
   if (images.length != 0) {
     showNotification('Misskeyにファイルをアップロードしています...', 'success')
-    fileIDs = await Promise.all(images.map(image => uploadImage(options.server, options.token, image) ))   
+    fileIDs = await Promise.all(images.map(image => uploadImage(image, options) ))   
   }
-
-  console.log(options.scope)
 
   const body: any = { "i": options.token }
   if (text) { body["text"] = text }
   if (fileIDs.length > 0) { body["fileIds"] = fileIDs }
   if (options.cw) { body["cw"] = "" }
+  if (options.sensitive) { body["isSensitive"] = true }
   if (options.scope) { body["visibility"] = options.scope }
 
   console.log("SEND: ", body)

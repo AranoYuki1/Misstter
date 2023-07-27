@@ -3,16 +3,34 @@ import { isShowingScopeModal, showScopeModal, closeScopeModal, updateScopeButton
 
 const gifButtonSelector = 'div[data-testid="gifSearchButton"]'
 const buttonSelector = 'div[data-testid="tweetButton"], div[data-testid="tweetButtonInline"]'
+const misskeyButtonClassName = 'misskey-button'
+const scopeButtonClassName = 'misskey-scope-button'
 
 // スコープボタンを作成する
-const createScopeButton = () => {
-  const scopeButton = document.createElement('div');
+const addScopeButton = (iconBox: HTMLElement) => {
+  // すでにボタンがある場合は何もしない
+  if (iconBox.querySelector(`.${scopeButtonClassName}`)) return;
 
-  chrome.storage.sync.get(['misskey_scope'], (result) => {
-    const scope = result.misskey_scope;
+  const scopeButton = document.createElement('div');
+  
+  const updateScopeIcon = () => chrome.storage.sync.get(['misskey_scope'], (result) => {
+    const scope = result.misskey_scope ?? 'public';
     updateScopeButton(scopeButton, scope);
   });
-  scopeButton.className = 'misskey-scope-button';
+
+  setInterval(() => {
+    updateScopeIcon();
+  }, 2000);
+  
+  updateScopeIcon();
+
+  chrome.storage.sync.get(['misskey_access'], (result) => {
+    const access = result.misskey_access ?? true;
+    if (!access) {
+      scopeButton.style.display = 'none';
+    }
+  });
+  scopeButton.className = scopeButtonClassName;
   scopeButton.style.width = '34px';
   scopeButton.style.height = '34px';
   scopeButton.style.backgroundColor = 'transparent';
@@ -37,11 +55,14 @@ const createScopeButton = () => {
     }
   }
 
-  return scopeButton;
+  iconBox.appendChild(scopeButton);
 }
 
 // ミスキーへの投稿ボタンを追加する
-const addMisskeyPostButton = (tweetBox: Node) => {
+const addMisskeyPostButton = (tweetBox: HTMLElement) => {
+  // すでにボタンがある場合は何もしない
+  if (tweetBox.querySelector(`.${misskeyButtonClassName}`)) return;
+
   const misskeyIcon = document.createElement('img')
   misskeyIcon.src = chrome.runtime.getURL('misskey_icon.png');
   misskeyIcon.style.width = '24px';
@@ -52,7 +73,7 @@ const addMisskeyPostButton = (tweetBox: Node) => {
   
   const misskeybutton = document.createElement('button');
   misskeybutton.appendChild(misskeyIcon);
-  misskeybutton.className = 'misskey-button';
+  misskeybutton.className = misskeyButtonClassName;
   misskeybutton.style.backgroundColor = 'rgb(134, 179, 0)';
   misskeybutton.style.borderRadius = '9999px';
   misskeybutton.style.cursor = 'pointer';
@@ -82,12 +103,7 @@ const addMisskeyPostButton = (tweetBox: Node) => {
   }
   misskeybutton.style.transition = 'background-color 0.2s ease-in-out';
   
-  tweetBox.parentElement!.insertBefore(misskeybutton, tweetBox.nextSibling);
-
-  // add post filter button
-  const iconsBlock = document.querySelector(gifButtonSelector)?.parentElement
-  if (!iconsBlock) return;
-  iconsBlock.appendChild(createScopeButton())
+  tweetBox.appendChild(misskeybutton);
 }
 
 
@@ -99,14 +115,23 @@ const observer = new MutationObserver(mutations => {
       if (mutation.type !== 'childList') return;
       mutation.addedNodes.forEach((node: any) => {
           if (node.nodeType === Node.ELEMENT_NODE) {
-            const tweetBox = node.querySelector(buttonSelector);
-            if (!tweetBox) return;
+            const tweetButton = node.querySelector(buttonSelector);
+            if (!tweetButton) return;
 
             // リプライボタンの場合は後続の処理を行わない
-            const isReplyButton = replyButtonLabels.indexOf(tweetBox.innerText) !== -1;
+            const isReplyButton = replyButtonLabels.indexOf(tweetButton.innerText) !== -1;
             if (isReplyButton) return;
 
-            addMisskeyPostButton(tweetBox);
+            // add misskey post button
+            const tweetBox = tweetButton.parentElement as HTMLElement;
+            if (tweetBox) {
+              addMisskeyPostButton(tweetBox);
+            }
+
+            const iconsBlock = document.querySelector(gifButtonSelector)?.parentElement as HTMLElement
+            if (iconsBlock) {
+              addScopeButton(iconsBlock);
+            }
           }
       });
   });
