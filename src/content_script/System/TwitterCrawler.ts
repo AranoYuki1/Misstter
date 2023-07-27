@@ -1,7 +1,7 @@
-import { DEFAULT_INSTANCE_URL } from '../common/constants';
-import { postToMisskey, Image } from './MisskeyAPI'
-import { showNotification } from './Notification'
-import { Scope } from './ScopeModal'; 
+import { DEFAULT_INSTANCE_URL } from '../../common/Constants';
+import { postToMisskey, Image } from '../UI/MisskeyAPI'
+import { showNotification } from '../UI/Notification'
+import { Scope } from '../UI/ScopeModal'; 
 
 const getTweetText = () => {
   const textContents = document.querySelectorAll('div[data-testid="tweetTextarea_0"] div[data-block="true"]');

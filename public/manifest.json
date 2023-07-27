@@ -12,7 +12,10 @@
 
   "content_scripts": [
       {
-          "matches": ["https://twitter.com/*"],
+          "matches": [
+            "https://twitter.com/*",
+            "https://tweetdeck.twitter.com/*"
+          ],
           "js": ["js/vendor.js", "js/content_script.js"]
       }
   ],
@@ -26,10 +29,12 @@
   "web_accessible_resources": [
     { 
       "resources": [
-        "misskey_icon.png",
-        "pubilc_scope.svg"
+        "misskey_icon.png"
       ], 
-      "matches": ["https://twitter.com/*"] 
+      "matches": [
+        "https://twitter.com/*",
+        "https://tweetdeck.twitter.com/*"
+      ] 
     }
   ]
 }
