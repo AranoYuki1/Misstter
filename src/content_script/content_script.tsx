@@ -1,19 +1,40 @@
 import { tweetToMisskey } from './TwitterCrawler';
+import { flag_icon } from './Icons'
 import { isShowingScopeModal, showScopeModal, closeScopeModal, updateScopeButton } from './ScopeModal';
 import { REPLY_BUTTON_LABELS } from '../common/constants';
 
 const gifButtonSelector = 'div[data-testid="gifSearchButton"]'
 const buttonSelector = 'div[data-testid="tweetButton"], div[data-testid="tweetButtonInline"]'
+const attachmentsImageSelector = 'div[data-testid="attachments"] div[role="group"]'
+const misskeyButtonClassName = 'misskey-button'
+const scopeButtonClassName = 'misskey-scope-button'
+const misskeyFlagClassName = 'misskey-flag'
 
 // スコープボタンを作成する
-const createScopeButton = () => {
-  const scopeButton = document.createElement('div');
+const addScopeButton = (iconBox: HTMLElement) => {
+  // すでにボタンがある場合は何もしない
+  if (iconBox.querySelector(`.${scopeButtonClassName}`)) return;
 
-  chrome.storage.sync.get(['misskey_scope'], (result) => {
-    const scope = result.misskey_scope;
+  const scopeButton = document.createElement('div');
+  
+  const updateScopeIcon = () => chrome.storage.sync.get(['misskey_scope'], (result) => {
+    const scope = result.misskey_scope ?? 'public';
     updateScopeButton(scopeButton, scope);
   });
-  scopeButton.className = 'misskey-scope-button';
+
+  setInterval(() => {
+    updateScopeIcon();
+  }, 2000);
+  
+  updateScopeIcon();
+
+  chrome.storage.sync.get(['misskey_access'], (result) => {
+    const access = result.misskey_access ?? true;
+    if (!access) {
+      scopeButton.style.display = 'none';
+    }
+  });
+  scopeButton.className = scopeButtonClassName;
   scopeButton.style.width = '34px';
   scopeButton.style.height = '34px';
   scopeButton.style.backgroundColor = 'transparent';
@@ -38,11 +59,14 @@ const createScopeButton = () => {
     }
   }
 
-  return scopeButton;
+  iconBox.appendChild(scopeButton);
 }
 
 // ミスキーへの投稿ボタンを追加する
-const addMisskeyPostButton = (tweetBox: Node) => {
+const addMisskeyPostButton = (tweetButton: HTMLElement, tweetBox: HTMLElement) => {
+  // すでにボタンがある場合は何もしない
+  if (tweetBox.querySelector(`.${misskeyButtonClassName}`)) return;
+
   const misskeyIcon = document.createElement('img')
   misskeyIcon.src = chrome.runtime.getURL('misskey_icon.png');
   misskeyIcon.style.width = '24px';
@@ -53,10 +77,9 @@ const addMisskeyPostButton = (tweetBox: Node) => {
   
   const misskeybutton = document.createElement('button');
   misskeybutton.appendChild(misskeyIcon);
-  misskeybutton.className = 'misskey-button';
+  misskeybutton.className = misskeyButtonClassName;
   misskeybutton.style.backgroundColor = 'rgb(134, 179, 0)';
   misskeybutton.style.borderRadius = '9999px';
-  misskeybutton.style.cursor = 'pointer';
   misskeybutton.style.height = '36px';
   misskeybutton.style.width = '36px';
   misskeybutton.style.marginLeft = '8px';
@@ -83,28 +106,126 @@ const addMisskeyPostButton = (tweetBox: Node) => {
   }
   misskeybutton.style.transition = 'background-color 0.2s ease-in-out';
   
-  tweetBox.parentElement!.insertBefore(misskeybutton, tweetBox.nextSibling);
+  tweetBox.appendChild(misskeybutton);
 
-  // add post filter button
-  const iconsBlock = document.querySelector(gifButtonSelector)?.parentElement
-  if (!iconsBlock) return;
-  iconsBlock.appendChild(createScopeButton())
+  const syncOpacity = () => {
+    const isDisabled = parseFloat(window.getComputedStyle(tweetButton).opacity) != 1;
+    if (isDisabled) {
+      misskeybutton.disabled = true;
+      misskeybutton.style.opacity = '0.5';
+      misskeybutton.style.cursor = "default";
+    } else {
+      misskeybutton.disabled = false;
+      misskeybutton.style.opacity = '1';
+      misskeybutton.style.cursor = 'pointer';
+    }
+  }
+
+  const observer = new MutationObserver(mutations => {
+    mutations.forEach(mutation => {
+        if (mutation.type !== 'attributes') return;
+        if (mutation.attributeName !== 'class') return;
+        syncOpacity();
+    });
+  })
+
+  syncOpacity();
+
+  observer.observe(tweetButton, { attributes: true });
+}
+
+const addMisskeyImageOptionButton = (editButton: HTMLElement, attachmentsImage: HTMLElement) => {
+  const misskeybutton = document.createElement('button');
+  misskeybutton.innerHTML = flag_icon;
+  misskeybutton.style.fill = 'rgb(255, 255, 255)';
+  misskeybutton.className = misskeyFlagClassName;
+  misskeybutton.style.backgroundColor = "rgba(15, 20, 25, 0.75)"
+  misskeybutton.style.backdropFilter = "blur(4px)"
+  misskeybutton.style.borderRadius = '9999px';
+  misskeybutton.style.height = '32px';
+  misskeybutton.style.width = '32px';
+  misskeybutton.style.marginLeft = '8px';
+  misskeybutton.style.marginRight = '8px';
+  misskeybutton.style.outline = 'none';
+  misskeybutton.style.display = 'flex'
+  misskeybutton.style.alignItems = 'center'
+  misskeybutton.style.justifyContent = 'center'
+  misskeybutton.style.cursor = 'pointer';
+  misskeybutton.style.border = "solid 1px rgb(167, 217, 18)";
+
+  misskeybutton.onclick = () => {
+    console.log('click');
+    if (misskeybutton.getAttribute('data-misskey-flag') === 'true') {
+      misskeybutton.setAttribute('data-misskey-flag', 'false');
+      misskeybutton.style.backgroundColor = 'rgba(15, 20, 25, 0.75)';
+    } else {
+      misskeybutton.setAttribute('data-misskey-flag', 'true');
+      misskeybutton.style.backgroundColor = 'rgb(167, 217, 18)';
+    }
+  }
+
+  misskeybutton.style.transition = 'background-color 0.2s ease-in-out';
+
+  misskeybutton.onmouseover = () => {
+    if (misskeybutton.getAttribute('data-misskey-flag') === 'true') return;
+    misskeybutton.style.backgroundColor = 'rgba(39, 44, 48, 0.75)';
+  }
+
+  misskeybutton.onmouseout = () => {
+    if (misskeybutton.getAttribute('data-misskey-flag') === 'true') return;
+    misskeybutton.style.backgroundColor = 'rgba(15, 20, 25, 0.75)';
+  }
+
+  editButton.parentElement!.insertBefore(misskeybutton, editButton);
+
+}
+
+const foundTweetButtonHandler = (tweetButton: HTMLElement) => {
+  if (!tweetButton) return;
+
+  // リプライボタンの場合は後続の処理を行わない
+  const isReplyButton = replyButtonLabels.indexOf(tweetButton.innerText) !== -1;
+  if (isReplyButton) return;
+
+  // add misskey post button
+  const tweetBox = tweetButton.parentElement as HTMLElement;
+  if (tweetBox) { addMisskeyPostButton(tweetButton, tweetBox); }
+
+  // add scope button
+  const iconsBlock = document.querySelector(gifButtonSelector)?.parentElement as HTMLElement
+  if (iconsBlock) { addScopeButton(iconsBlock); }
+}
+
+const foundAttachmentsImageHandler = (attachmentsImage: HTMLElement) => {
+  if (attachmentsImage.attributes.getNamedItem('data-misskey-attachments-image')) return;
+  attachmentsImage.attributes.setNamedItem(document.createAttribute('data-misskey-attachments-image'));
+  const editButton = Array.from(attachmentsImage.querySelectorAll("div[role='button']"))[1] as HTMLElement;
+  if (!editButton) return;
+
+  addMisskeyImageOptionButton(editButton, attachmentsImage);
 }
 
 const observer = new MutationObserver(mutations => {
   mutations.forEach(mutation => {
       if (mutation.type !== 'childList') return;
       mutation.addedNodes.forEach((node: any) => {
-          if (node.nodeType === Node.ELEMENT_NODE) {
-            const tweetBox = node.querySelector(buttonSelector);
-            if (!tweetBox) return;
-
-            // リプライボタンの場合は後続の処理を行わない
-            const isReplyButton = REPLY_BUTTON_LABELS.indexOf(tweetBox.innerText) !== -1;
-            if (isReplyButton) return;
-
-            addMisskeyPostButton(tweetBox);
-          }
+        if (node.nodeType !== Node.ELEMENT_NODE) return;
+        
+        const tweetButton = node.querySelector(buttonSelector);
+        if (tweetButton) { 
+          // リプライボタンの場合は後続の処理を行わない
+          const isReplyButton = REPLY_BUTTON_LABELS.indexOf(tweetBox.innerText) !== -1;
+          if (isReplyButton) return;
+          foundTweetButtonHandler(tweetButton); 
+          return;
+        }
+        
+        const attachmentsImages = document.querySelectorAll(attachmentsImageSelector);
+        if (attachmentsImages) { 
+          attachmentsImages.forEach((attachmentsImage: any) => {
+            foundAttachmentsImageHandler(attachmentsImage); 
+          })
+        }
       });
   });
 });

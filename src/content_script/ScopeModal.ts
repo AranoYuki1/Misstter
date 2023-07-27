@@ -47,6 +47,7 @@ const createScopeModal = (callback: (scope: Scope) => void) => {
       align-items: center;
       padding: 8px;
       cursor: pointer;
+      transition: background-color 0.1s ease 0s;
     }
 
     .misskey_access_scope li:hover {
@@ -78,7 +79,9 @@ const createScopeModal = (callback: (scope: Scope) => void) => {
   </style>
 
   <ul class='misskey_access_scope'>
-    <h5>公開範囲</h5>
+    <h5>
+      公開範囲 <span style='font-size: 12px; color: rgb(101, 119, 134);'> (Misskey) </span>
+    </h5>
 
     <li selcted>
       ${public_scope_icon}
@@ -124,7 +127,7 @@ const createScopeModal = (callback: (scope: Scope) => void) => {
     });
   }
 
-  chrome.storage.sync.get(['misskey_scope'], (result) => {
+  const updateSelection = () => chrome.storage.sync.get(['misskey_scope'], (result) => {
     const scope = result.misskey_scope ?? "public";
     if (scope === 'public') {
       setModalSelection(0);
@@ -135,12 +138,17 @@ const createScopeModal = (callback: (scope: Scope) => void) => {
     }
   });
 
+
+  setInterval(() => {
+    updateSelection();
+  }, 2000);
+  updateSelection();
+
   modal.appendChild(modal_content);
   return modal
 }
 
 const scopeModelHandler = (scope: Scope) => {
-  console.log(scope);
   chrome.storage.sync.set({ misskey_scope: scope });
   document.querySelectorAll('.misskey-scope-button').forEach((button) => {
     updateScopeButton(button as HTMLDivElement, scope);
@@ -151,8 +159,9 @@ const scopeModelHandler = (scope: Scope) => {
 const scopeModel = createScopeModal(scopeModelHandler);
 
 export const showScopeModal = (scopeButton: HTMLDivElement) => {
-  if (isShowingScopeModal()) return;
-  document.body.appendChild(scopeModel);
+  if (!isShowingScopeModal()) {
+    document.body.appendChild(scopeModel);
+  }
 
   // set position of modal
   const rect = scopeButton.getBoundingClientRect();
