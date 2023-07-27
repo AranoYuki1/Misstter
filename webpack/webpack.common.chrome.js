@@ -2,42 +2,20 @@ const webpack = require("webpack");
 const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
 const srcDir = path.join(__dirname, "..", "src");
+const common = require("./webpack.common");
 
 module.exports = {
-    entry: {
-      popup: path.join(srcDir, 'popup/Popup.tsx'),
-      content_script: path.join(srcDir, 'content_script/contents.ts'),
-    },
+    ...common,
     output: {
-        path: path.join(__dirname, "../dist/js"),
+        path: path.join(__dirname, "../dist/chrome/js"),
         filename: "[name].js",
     },
-    optimization: {
-        splitChunks: {
-            name: "vendor",
-            chunks: 'all',
-        },
-    },
-    module: {
-        rules: [
-            {
-                test: /\.tsx?$/,
-                use: "ts-loader",
-                exclude: /node_modules/,
-            },
-        ],
-    },
-    resolve: {
-        extensions: [".ts", ".tsx", ".js"],
-    },
+
     plugins: [
+        ...common.plugins,
         new CopyPlugin({
-            patterns: [{ from: ".", to: "../", context: "public" }],
-            options: {},
-        }),
-        new CopyPlugin({
-            patterns: [{ from: ".", to: "../", context: "chrome" }],
+            patterns: [{ from: ".", to: "../", context: "browser/chrome" }],
             options: {},
         })
-    ],
+    ]
 };

@@ -1,3 +1,5 @@
+import browser from 'webextension-polyfill';
+
 import { public_scope_icon, home_scope_icon, lock_scope_icon, modal_pin_icon } from "./Icons"
 
 export type Scope = 'public' | 'home' | 'followers';
@@ -127,8 +129,8 @@ const createScopeModal = (callback: (scope: Scope) => void) => {
     });
   }
 
-  const updateSelection = () => chrome.storage.sync.get(['misskey_scope'], (result) => {
-    const scope = result.misskey_scope ?? "public";
+  const updateSelection = () => browser.storage.sync.get(['misskey_scope']).then((result) => {
+    const scope = result?.misskey_scope ?? "public";
     if (scope === 'public') {
       setModalSelection(0);
     } else if (scope === 'home') {
@@ -137,7 +139,6 @@ const createScopeModal = (callback: (scope: Scope) => void) => {
       setModalSelection(2);
     }
   });
-
 
   setInterval(() => {
     updateSelection();
@@ -149,7 +150,7 @@ const createScopeModal = (callback: (scope: Scope) => void) => {
 }
 
 const scopeModelHandler = (scope: Scope) => {
-  chrome.storage.sync.set({ misskey_scope: scope });
+  browser.storage.sync.set({ misskey_scope: scope });
   document.querySelectorAll('.misskey-scope-button').forEach((button) => {
     updateScopeButton(button as HTMLDivElement, scope);
   });

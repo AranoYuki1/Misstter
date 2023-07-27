@@ -1,3 +1,5 @@
+import browser from 'webextension-polyfill';
+
 import { isShowingScopeModal, showScopeModal, closeScopeModal, updateScopeButton } from '../UI/ScopeModal';
 
 export const scopeButtonClassName = 'misskey-scope-button'
@@ -5,8 +7,8 @@ export const scopeButtonClassName = 'misskey-scope-button'
 export const createScopeButton = () => {
   const scopeButton = document.createElement('div');
   
-  const updateScopeIcon = () => chrome.storage.sync.get(['misskey_scope'], (result) => {
-    const scope = result.misskey_scope ?? 'public';
+  const updateScopeIcon = () => browser.storage.sync.get(['misskey_scope']).then((result) => {
+    const scope = result?.misskey_scope ?? 'public';
     updateScopeButton(scopeButton, scope);
   });
 
@@ -16,12 +18,13 @@ export const createScopeButton = () => {
   
   updateScopeIcon();
 
-  chrome.storage.sync.get(['misskey_access'], (result) => {
-    const access = result.misskey_access ?? true;
-    if (!access) {
-      scopeButton.style.display = 'none';
-    }
-  });
+  browser.storage.sync.get(['misskey_access'])
+    .then((result) => {
+      const access = result?.misskey_access ?? true;
+      if (!access) {
+        scopeButton.style.display = 'none';
+      }
+    });
   scopeButton.className = scopeButtonClassName;
   scopeButton.style.width = '34px';
   scopeButton.style.height = '34px';

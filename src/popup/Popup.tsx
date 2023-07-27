@@ -1,3 +1,4 @@
+import browser from 'webextension-polyfill';
 import React, { useEffect, useState } from "react"
 import ReactDOM from "react-dom"
 import { Container, Typography, AppBar, Toolbar, TextField, FormControlLabel, Checkbox } from "@mui/material"
@@ -11,36 +12,37 @@ const Popup = () => {
   const [showAccess, setShowAccess] = useState<boolean|null>(null)
 
   useEffect(() => {
-    chrome.storage.sync.get(['misskey_token', 'misskey_server', 'misskey_cw', 'misskey_sensitive', 'misskey_access'], (result) => {
-      const token = result.misskey_token; if (token) { setToken(token) }
-      const server = result.misskey_server; if (server) { setServer(server) }
-      setCw(result.misskey_cw)
-      setSensitive(result.misskey_sensitive)
-      setShowAccess(result.misskey_access)
+    browser.storage.sync.get(['misskey_token', 'misskey_server', 'misskey_cw', 'misskey_sensitive', 'misskey_access']).then((result) => {
+      const token = result?.misskey_token; if (token) { setToken(token) }
+      const server = result?.misskey_server; if (server) { setServer(server) }
+      setCw(result?.misskey_cw)
+      setSensitive(result?.misskey_sensitive)
+      setShowAccess(result?.misskey_access)
     })
   }, [])
   
   const updateToken = (token: string) => {
     setToken(token)
-    chrome.storage.sync.set({ misskey_token: token });
+    console.log(token)
+    browser.storage.sync.set({ misskey_token: token });
   }
   const updateServer = (server: string) => {
     setServer(server)
     if (!server.startsWith('https://')) { server = 'https://' + server }
     if (server.endsWith('/')) { server = server.slice(0, -1) }
-    chrome.storage.sync.set({ misskey_server: server });
+    browser.storage.sync.set({ misskey_server: server });
   }
   const updateCw = (cw: boolean) => {
     setCw(cw)
-    chrome.storage.sync.set({ misskey_cw: cw })
+    browser.storage.sync.set({ misskey_cw: cw })
   }
   const updateSensitive = (sensitive: boolean) => {
     setSensitive(sensitive)
-    chrome.storage.sync.set({ misskey_sensitive: sensitive })
+    browser.storage.sync.set({ misskey_sensitive: sensitive })
   }
   const updateAccess = (access: boolean) => {
     setShowAccess(access)
-    chrome.storage.sync.set({ misskey_access: access })
+    browser.storage.sync.set({ misskey_access: access })
   }
 
   const openDonationPage = () => {

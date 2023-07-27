@@ -9,7 +9,8 @@ specifiers:
   '@types/jest': ^27.0.2
   '@types/react': ^17.0.0
   '@types/react-dom': ^17.0.0
-  copy-webpack-plugin: ^9.0.1
+  '@types/webextension-polyfill': ^0.10.1
+  copy-webpack-plugin: ^9.1.0
   jest: ^27.2.1
   prettier: ^2.2.1
   react: ^17.0.1
@@ -18,6 +19,7 @@ specifiers:
   ts-jest: ^27.0.5
   ts-loader: ^8.0.0
   typescript: '^4.4.3 '
+  webextension-polyfill: ^0.10.0
   webpack: ^5.88.2
   webpack-cli: ^5.1.4
   webpack-merge: ^5.9.0
@@ -29,12 +31,14 @@ dependencies:
   '@mui/material': 5.14.2_b6e4cwsrv5z5hncfrvkdwmdpeq
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
+  webextension-polyfill: 0.10.0
 
 devDependencies:
   '@types/chrome': 0.0.158
   '@types/jest': 27.5.2
   '@types/react': 17.0.62
   '@types/react-dom': 17.0.20
+  '@types/webextension-polyfill': 0.10.1
   copy-webpack-plugin: 9.1.0_webpack@5.88.2
   jest: 27.5.1
   prettier: 2.8.8
@@ -1110,6 +1114,10 @@ packages:
 
   /@types/stack-utils/2.0.1:
     resolution: {integrity: sha512-Hl219/BT5fLAaz6NDkSuhzasy49dwQS/DSdu4MdggFB8zcXv7vflBI3xp7FEmkmdDkBUI2bPUNeMttp2knYdxw==}
+    dev: true
+
+  /@types/webextension-polyfill/0.10.1:
+    resolution: {integrity: sha512-Sdg+E2F5JUbhkE1qX15QUxpyhfMFKRGJqND9nb1C0gNN4NR7kCV31/1GvNbg6Xe+m/JElJ9/lG5kepMzjGPuQw==}
     dev: true
 
   /@types/yargs-parser/21.0.0:
@@ -3747,6 +3755,10 @@ packages:
       glob-to-regexp: 0.4.1
       graceful-fs: 4.2.11
     dev: true
+
+  /webextension-polyfill/0.10.0:
+    resolution: {integrity: sha512-c5s35LgVa5tFaHhrZDnr3FpQpjj1BB+RXhLTYUxGqBVN460HkbM8TBtEqdXWbpTKfzwCcjAZVF7zXCYSKtcp9g==}
+    dev: false
 
   /webidl-conversions/5.0.0:
     resolution: {integrity: sha512-VlZwKPCkYKxQgeSbH5EyngOmRp7Ww7I9rQLERETtf5ofd9pGeswWiOtogpEO850jziPRarreGxn5QIiTqpb2wA==}

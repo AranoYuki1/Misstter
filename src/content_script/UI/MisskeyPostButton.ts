@@ -1,8 +1,10 @@
+import browser from 'webextension-polyfill';
+
 export const misskeyButtonClassName = 'misskey-button'
 
 export const createMisskeyPostButton = (tweetToMisskeyFunc: () => Promise<void>) => {
   const misskeyIcon = document.createElement('img')
-  misskeyIcon.src = chrome.runtime.getURL('misskey_icon.png');
+  misskeyIcon.src = browser.runtime.getURL('misskey_icon.png');
   misskeyIcon.style.width = '24px';
   misskeyIcon.style.height = '24px';
   misskeyIcon.style.verticalAlign = 'middle';
