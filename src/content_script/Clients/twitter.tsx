@@ -1,13 +1,12 @@
 import { tweetToMisskey } from '../System/TwitterCrawler';
-import { flag_icon } from '../UI/Icons'
 import { REPLY_BUTTON_LABELS } from '../../common/Constants';
 import { createScopeButton, scopeButtonClassName } from "../UI/ScopeButton"
 import { createMisskeyPostButton, misskeyButtonClassName, syncDisableState } from "../UI/MisskeyPostButton"
+import { createMisskeyImageOptionButton } from "../UI/ImageFlagButton"
 
 const gifButtonSelector = 'div[data-testid="gifSearchButton"]'
 const buttonSelector = 'div[data-testid="tweetButton"], div[data-testid="tweetButtonInline"]'
 const attachmentsImageSelector = 'div[data-testid="attachments"] div[role="group"]'
-const misskeyFlagClassName = 'misskey-flag'
 
 // スコープボタンを作成する
 const addScopeButton = (iconBox: HTMLElement) => {
@@ -16,7 +15,6 @@ const addScopeButton = (iconBox: HTMLElement) => {
   const scopeButton = createScopeButton();
   iconBox.appendChild(scopeButton);
 }
-
 
 // ミスキーへの投稿ボタンを追加する
 const addMisskeyPostButton = (tweetButton: HTMLElement, tweetBox: HTMLElement) => {
@@ -28,50 +26,10 @@ const addMisskeyPostButton = (tweetButton: HTMLElement, tweetBox: HTMLElement) =
   syncDisableState(tweetButton, misskeybutton);
 }
 
+// ミスキーへのセンシティブ設定ボタンを追加する
 const addMisskeyImageOptionButton = (editButton: HTMLElement, attachmentsImage: HTMLElement) => {
-  const misskeybutton = document.createElement('button');
-  misskeybutton.innerHTML = flag_icon;
-  misskeybutton.style.fill = 'rgb(255, 255, 255)';
-  misskeybutton.className = misskeyFlagClassName;
-  misskeybutton.style.backgroundColor = "rgba(15, 20, 25, 0.75)"
-  misskeybutton.style.backdropFilter = "blur(4px)"
-  misskeybutton.style.borderRadius = '9999px';
-  misskeybutton.style.height = '32px';
-  misskeybutton.style.width = '32px';
-  misskeybutton.style.marginLeft = '8px';
-  misskeybutton.style.marginRight = '8px';
-  misskeybutton.style.outline = 'none';
-  misskeybutton.style.display = 'flex'
-  misskeybutton.style.alignItems = 'center'
-  misskeybutton.style.justifyContent = 'center'
-  misskeybutton.style.cursor = 'pointer';
-  misskeybutton.style.border = "solid 1px rgb(167, 217, 18)";
-
-  misskeybutton.onclick = () => {
-    console.log('click');
-    if (misskeybutton.getAttribute('data-misskey-flag') === 'true') {
-      misskeybutton.setAttribute('data-misskey-flag', 'false');
-      misskeybutton.style.backgroundColor = 'rgba(15, 20, 25, 0.75)';
-    } else {
-      misskeybutton.setAttribute('data-misskey-flag', 'true');
-      misskeybutton.style.backgroundColor = 'rgb(167, 217, 18)';
-    }
-  }
-
-  misskeybutton.style.transition = 'background-color 0.2s ease-in-out';
-
-  misskeybutton.onmouseover = () => {
-    if (misskeybutton.getAttribute('data-misskey-flag') === 'true') return;
-    misskeybutton.style.backgroundColor = 'rgba(39, 44, 48, 0.75)';
-  }
-
-  misskeybutton.onmouseout = () => {
-    if (misskeybutton.getAttribute('data-misskey-flag') === 'true') return;
-    misskeybutton.style.backgroundColor = 'rgba(15, 20, 25, 0.75)';
-  }
-
+  const misskeybutton = createMisskeyImageOptionButton();
   editButton.parentElement!.insertBefore(misskeybutton, editButton);
-
 }
 
 const foundTweetButtonHandler = (tweetButton: HTMLElement) => {
@@ -91,11 +49,12 @@ const foundTweetButtonHandler = (tweetButton: HTMLElement) => {
 }
 
 const foundAttachmentsImageHandler = (attachmentsImage: HTMLElement) => {
-  if (attachmentsImage.attributes.getNamedItem('data-misskey-attachments-image')) return;
-  attachmentsImage.attributes.setNamedItem(document.createAttribute('data-misskey-attachments-image'));
+  // すでにボタンがある場合は何もしない
+  if (attachmentsImage.getAttribute('data-has-flag-button')) return;
+  attachmentsImage.setAttribute('data-has-flag-button', 'true');
+  
   const editButton = Array.from(attachmentsImage.querySelectorAll("div[role='button']"))[1] as HTMLElement;
   if (!editButton) return;
-
   addMisskeyImageOptionButton(editButton, attachmentsImage);
 }
 
@@ -106,9 +65,7 @@ const observer = new MutationObserver(mutations => {
         if (node.nodeType !== Node.ELEMENT_NODE) return;
         
         const tweetButton = node.querySelector(buttonSelector);
-        if (tweetButton) { 
-          foundTweetButtonHandler(tweetButton); 
-        }
+        if (tweetButton) { foundTweetButtonHandler(tweetButton); }
         
         const attachmentsImages = document.querySelectorAll(attachmentsImageSelector);
         if (attachmentsImages) { 
