@@ -1,6 +1,3 @@
-const { merge } = require('webpack-merge');
-const common = require('./webpack.common.chrome.js');
+const common = require('./webpack.common.js');
 
-module.exports = merge(common, {
-    mode: 'production'
-});
+module.exports = common("chrome", "production")

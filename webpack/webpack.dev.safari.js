@@ -1,7 +1,3 @@
-const { merge } = require('webpack-merge');
-const common = require('./webpack.common.safari.js');
+const common = require('./webpack.common.js');
 
-module.exports = merge(common, {
-    devtool: 'inline-source-map',
-    mode: 'development'
-});
+module.exports = common("safari", "development")
