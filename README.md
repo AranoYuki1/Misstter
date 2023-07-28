@@ -2,24 +2,39 @@
 
 MisstterはTwitterにMisskeyへの投稿ボタンを追加するChrome拡張です。
 
-## インストール方法
-1. [リリースページ](https://github.com/AranoYuki1/Misstter/releases)から最新版をダウンロード
-1. `Misstter.zip` をダウンロード
-2. `Misstter.zip` を展開
-3. Chromeで[chrome://extensions/](chrome://extensions/) を開く
-4. 「デベロッパーモード」を有効にする。
-5. 「パッケージ化されていない拡張機能を読み込む」から展開したフォルダを開く
+# インストール方法
+
+## Chromeの場合
+
+1. `Misstter_Chrome.zip` をこの下部からダウンロード & 展開
+2. [chrome://extensions/](chrome://extensions/) を開く
+3. 「デベロッパーモード」を有効にする。
+4. 「パッケージ化されていない拡張機能を読み込む」から展開したフォルダを開く
+5. MisskeyのトークンをPopupに入力
+6. (必要があれば) Popup に Misskey サーバーを入力
+
+## Firefoxの場合
+
+1. `Misstter_Firefox.xpi` をこの下部からダウンロード
+2.  about:addons を開く
+3.  右上の歯車マークから「ファイルからアドオンをインストール」
 6. MisskeyのトークンをPopupに入力
 7. (必要があれば) Popup に Misskey サーバーを入力
 
-> Misskey APIの発行は `設定 > API > アクセストークンの発行` から行ってください。 (全てを有効にしてください。)
+
+
+> PopupはChrome/Firefoxの右上の拡張機能ボタンからアクセスできます。
+> 
+> Misskey APIの発行は `Settings > API > アクセストークンの発行` から行ってください。
+>  (全てを有効にしてください。)
 
 ##### 注意
 
-この方法でのインストールは開発者モードを用います。
+Chromeへのインストールは開発者モードを用います。
 作者が確認していますので、マルウェアが入ることはほとんどないはずですが、リスクをご承知の上でご使用ください。
 
 現在Chromeストアに公開のための審査中です。不安がある方はChromeストアでの公開までお待ちください。
+Firefox版は検証が終わっているためそのまま利用可能です。
 
 ---
 
