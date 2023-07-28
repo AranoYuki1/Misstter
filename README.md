@@ -52,7 +52,6 @@ Misstter is Chrome addon to add misskey button on Twitter.
 6. Load extension from "Load Unpacked"
 7. Enter misskey token in Extension Popup
 
-
 ---
 
 ## 開発者へ / For Developers
@@ -75,6 +74,9 @@ npm run build_chrome
 
 # firefox
 npm run build_firefox
+
+# safari
+npm run build_safari
 ```
 
 ## Build in watch mode
@@ -87,11 +89,24 @@ npm run watch_chrome
 
 # firefox
 npm run watch_firefox
+
+# safari
+npm run watch_safari
 ```
 
 ## Load extension to browser
 
-Load `dist/[browser_name]` directory
+### Chrome
+
+Open [chrome://extensions/](chrome://extensions/) and load `dist/chrome` directory.
+
+### Firefox
+
+Open about:addons and load `dist/firefox/manifest.json` file. 
+
+### Safari
+
+Open `browser/safari/Misstter/Misstter.xcodeproj` in Xcode and build.
 
 ## Test
 

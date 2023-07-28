@@ -1,0 +1,951 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B64340352A73C16C00429307 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64340342A73C16C00429307 /* AppDelegate.swift */; };
+		B64340372A73C16C00429307 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64340362A73C16C00429307 /* SceneDelegate.swift */; };
+		B643403A2A73C16C00429307 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B64340382A73C16C00429307 /* LaunchScreen.storyboard */; };
+		B643403D2A73C16C00429307 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B643403B2A73C16C00429307 /* Main.storyboard */; };
+		B64340462A73C16C00429307 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64340452A73C16C00429307 /* AppDelegate.swift */; };
+		B64340492A73C16C00429307 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B64340472A73C16C00429307 /* Main.storyboard */; };
+		B64340512A73C16C00429307 /* Misstter Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B64340502A73C16C00429307 /* Misstter Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B643405B2A73C16C00429307 /* Misstter Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B643405A2A73C16C00429307 /* Misstter Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B64340612A73C16C00429307 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = B64340242A73C16B00429307 /* Main.html */; };
+		B64340622A73C16C00429307 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = B64340242A73C16B00429307 /* Main.html */; };
+		B64340632A73C16C00429307 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B64340262A73C16B00429307 /* Icon.png */; };
+		B64340642A73C16C00429307 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B64340262A73C16B00429307 /* Icon.png */; };
+		B64340652A73C16C00429307 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = B64340272A73C16B00429307 /* Style.css */; };
+		B64340662A73C16C00429307 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = B64340272A73C16B00429307 /* Style.css */; };
+		B64340672A73C16C00429307 /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = B64340282A73C16B00429307 /* Script.js */; };
+		B64340682A73C16C00429307 /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = B64340282A73C16B00429307 /* Script.js */; };
+		B64340692A73C16C00429307 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64340292A73C16B00429307 /* ViewController.swift */; };
+		B643406A2A73C16C00429307 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64340292A73C16B00429307 /* ViewController.swift */; };
+		B643406B2A73C16C00429307 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B643402A2A73C16C00429307 /* Assets.xcassets */; };
+		B643406C2A73C16C00429307 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B643402A2A73C16C00429307 /* Assets.xcassets */; };
+		B643406D2A73C16C00429307 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B643402C2A73C16C00429307 /* SafariWebExtensionHandler.swift */; };
+		B643406E2A73C16C00429307 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B643402C2A73C16C00429307 /* SafariWebExtensionHandler.swift */; };
+		B64340862A73C16C00429307 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B64340802A73C16C00429307 /* icon.png */; };
+		B64340872A73C16C00429307 /* js in Resources */ = {isa = PBXBuildFile; fileRef = B64340812A73C16C00429307 /* js */; };
+		B64340882A73C16C00429307 /* misskey_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B64340822A73C16C00429307 /* misskey_icon.png */; };
+		B64340892A73C16C00429307 /* popup.html in Resources */ = {isa = PBXBuildFile; fileRef = B64340832A73C16C00429307 /* popup.html */; };
+		B643408A2A73C16C00429307 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = B64340842A73C16C00429307 /* manifest.json */; };
+		B643408B2A73C16C00429307 /* options.html in Resources */ = {isa = PBXBuildFile; fileRef = B64340852A73C16C00429307 /* options.html */; };
+		B643408C2A73C16C00429307 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B64340802A73C16C00429307 /* icon.png */; };
+		B643408D2A73C16C00429307 /* js in Resources */ = {isa = PBXBuildFile; fileRef = B64340812A73C16C00429307 /* js */; };
+		B643408E2A73C16C00429307 /* misskey_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B64340822A73C16C00429307 /* misskey_icon.png */; };
+		B643408F2A73C16C00429307 /* popup.html in Resources */ = {isa = PBXBuildFile; fileRef = B64340832A73C16C00429307 /* popup.html */; };
+		B64340902A73C16C00429307 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = B64340842A73C16C00429307 /* manifest.json */; };
+		B64340912A73C16C00429307 /* options.html in Resources */ = {isa = PBXBuildFile; fileRef = B64340852A73C16C00429307 /* options.html */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B64340522A73C16C00429307 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B643401E2A73C16B00429307 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B643404F2A73C16C00429307;
+			remoteInfo = "Misstter Extension (iOS)";
+		};
+		B643405C2A73C16C00429307 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B643401E2A73C16B00429307 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B64340592A73C16C00429307;
+			remoteInfo = "Misstter Extension (macOS)";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B64340742A73C16C00429307 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				B64340512A73C16C00429307 /* Misstter Extension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B643407B2A73C16C00429307 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				B643405B2A73C16C00429307 /* Misstter Extension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		B64340252A73C16B00429307 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = ../Base.lproj/Main.html; sourceTree = "<group>"; };
+		B64340262A73C16B00429307 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		B64340272A73C16B00429307 /* Style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = Style.css; sourceTree = "<group>"; };
+		B64340282A73C16B00429307 /* Script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Script.js; sourceTree = "<group>"; };
+		B64340292A73C16B00429307 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B643402A2A73C16C00429307 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B643402C2A73C16C00429307 /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
+		B64340312A73C16C00429307 /* Misstter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Misstter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B64340342A73C16C00429307 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B64340362A73C16C00429307 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		B64340392A73C16C00429307 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B643403C2A73C16C00429307 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B643403E2A73C16C00429307 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B64340432A73C16C00429307 /* Misstter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Misstter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B64340452A73C16C00429307 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B64340482A73C16C00429307 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B643404A2A73C16C00429307 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B643404B2A73C16C00429307 /* Misstter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Misstter.entitlements; sourceTree = "<group>"; };
+		B64340502A73C16C00429307 /* Misstter Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Misstter Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B64340552A73C16C00429307 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B643405A2A73C16C00429307 /* Misstter Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Misstter Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B643405F2A73C16C00429307 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B64340602A73C16C00429307 /* Misstter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Misstter.entitlements; sourceTree = "<group>"; };
+		B64340802A73C16C00429307 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../../../../dist/safari/icon.png; sourceTree = "<group>"; };
+		B64340812A73C16C00429307 /* js */ = {isa = PBXFileReference; lastKnownFileType = folder; name = js; path = ../../../../dist/safari/js; sourceTree = "<group>"; };
+		B64340822A73C16C00429307 /* misskey_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = misskey_icon.png; path = ../../../../dist/safari/misskey_icon.png; sourceTree = "<group>"; };
+		B64340832A73C16C00429307 /* popup.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = popup.html; path = ../../../../dist/safari/popup.html; sourceTree = "<group>"; };
+		B64340842A73C16C00429307 /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = manifest.json; path = ../../../../dist/safari/manifest.json; sourceTree = "<group>"; };
+		B64340852A73C16C00429307 /* options.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = options.html; path = ../../../../dist/safari/options.html; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B643402E2A73C16C00429307 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B64340402A73C16C00429307 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B643404D2A73C16C00429307 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B64340572A73C16C00429307 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B643401D2A73C16B00429307 = {
+			isa = PBXGroup;
+			children = (
+				B64340222A73C16B00429307 /* Shared (App) */,
+				B643402B2A73C16C00429307 /* Shared (Extension) */,
+				B64340332A73C16C00429307 /* iOS (App) */,
+				B64340442A73C16C00429307 /* macOS (App) */,
+				B64340542A73C16C00429307 /* iOS (Extension) */,
+				B643405E2A73C16C00429307 /* macOS (Extension) */,
+				B64340322A73C16C00429307 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B64340222A73C16B00429307 /* Shared (App) */ = {
+			isa = PBXGroup;
+			children = (
+				B64340292A73C16B00429307 /* ViewController.swift */,
+				B643402A2A73C16C00429307 /* Assets.xcassets */,
+				B64340232A73C16B00429307 /* Resources */,
+			);
+			path = "Shared (App)";
+			sourceTree = "<group>";
+		};
+		B64340232A73C16B00429307 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B64340242A73C16B00429307 /* Main.html */,
+				B64340262A73C16B00429307 /* Icon.png */,
+				B64340272A73C16B00429307 /* Style.css */,
+				B64340282A73C16B00429307 /* Script.js */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		B643402B2A73C16C00429307 /* Shared (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				B643407F2A73C16C00429307 /* Resources */,
+				B643402C2A73C16C00429307 /* SafariWebExtensionHandler.swift */,
+			);
+			path = "Shared (Extension)";
+			sourceTree = "<group>";
+		};
+		B64340322A73C16C00429307 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B64340312A73C16C00429307 /* Misstter.app */,
+				B64340432A73C16C00429307 /* Misstter.app */,
+				B64340502A73C16C00429307 /* Misstter Extension.appex */,
+				B643405A2A73C16C00429307 /* Misstter Extension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B64340332A73C16C00429307 /* iOS (App) */ = {
+			isa = PBXGroup;
+			children = (
+				B64340342A73C16C00429307 /* AppDelegate.swift */,
+				B64340362A73C16C00429307 /* SceneDelegate.swift */,
+				B64340382A73C16C00429307 /* LaunchScreen.storyboard */,
+				B643403B2A73C16C00429307 /* Main.storyboard */,
+				B643403E2A73C16C00429307 /* Info.plist */,
+			);
+			path = "iOS (App)";
+			sourceTree = "<group>";
+		};
+		B64340442A73C16C00429307 /* macOS (App) */ = {
+			isa = PBXGroup;
+			children = (
+				B64340452A73C16C00429307 /* AppDelegate.swift */,
+				B64340472A73C16C00429307 /* Main.storyboard */,
+				B643404A2A73C16C00429307 /* Info.plist */,
+				B643404B2A73C16C00429307 /* Misstter.entitlements */,
+			);
+			path = "macOS (App)";
+			sourceTree = "<group>";
+		};
+		B64340542A73C16C00429307 /* iOS (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				B64340552A73C16C00429307 /* Info.plist */,
+			);
+			path = "iOS (Extension)";
+			sourceTree = "<group>";
+		};
+		B643405E2A73C16C00429307 /* macOS (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				B643405F2A73C16C00429307 /* Info.plist */,
+				B64340602A73C16C00429307 /* Misstter.entitlements */,
+			);
+			path = "macOS (Extension)";
+			sourceTree = "<group>";
+		};
+		B643407F2A73C16C00429307 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B64340802A73C16C00429307 /* icon.png */,
+				B64340812A73C16C00429307 /* js */,
+				B64340822A73C16C00429307 /* misskey_icon.png */,
+				B64340832A73C16C00429307 /* popup.html */,
+				B64340842A73C16C00429307 /* manifest.json */,
+				B64340852A73C16C00429307 /* options.html */,
+			);
+			name = Resources;
+			path = "Shared (Extension)";
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B64340302A73C16C00429307 /* Misstter (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B64340752A73C16C00429307 /* Build configuration list for PBXNativeTarget "Misstter (iOS)" */;
+			buildPhases = (
+				B643402D2A73C16C00429307 /* Sources */,
+				B643402E2A73C16C00429307 /* Frameworks */,
+				B643402F2A73C16C00429307 /* Resources */,
+				B64340742A73C16C00429307 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B64340532A73C16C00429307 /* PBXTargetDependency */,
+			);
+			name = "Misstter (iOS)";
+			productName = "Misstter (iOS)";
+			productReference = B64340312A73C16C00429307 /* Misstter.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B64340422A73C16C00429307 /* Misstter (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B643407C2A73C16C00429307 /* Build configuration list for PBXNativeTarget "Misstter (macOS)" */;
+			buildPhases = (
+				B643403F2A73C16C00429307 /* Sources */,
+				B64340402A73C16C00429307 /* Frameworks */,
+				B64340412A73C16C00429307 /* Resources */,
+				B643407B2A73C16C00429307 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B643405D2A73C16C00429307 /* PBXTargetDependency */,
+			);
+			name = "Misstter (macOS)";
+			productName = "Misstter (macOS)";
+			productReference = B64340432A73C16C00429307 /* Misstter.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B643404F2A73C16C00429307 /* Misstter Extension (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B64340712A73C16C00429307 /* Build configuration list for PBXNativeTarget "Misstter Extension (iOS)" */;
+			buildPhases = (
+				B643404C2A73C16C00429307 /* Sources */,
+				B643404D2A73C16C00429307 /* Frameworks */,
+				B643404E2A73C16C00429307 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Misstter Extension (iOS)";
+			productName = "Misstter Extension (iOS)";
+			productReference = B64340502A73C16C00429307 /* Misstter Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		B64340592A73C16C00429307 /* Misstter Extension (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B64340782A73C16C00429307 /* Build configuration list for PBXNativeTarget "Misstter Extension (macOS)" */;
+			buildPhases = (
+				B64340562A73C16C00429307 /* Sources */,
+				B64340572A73C16C00429307 /* Frameworks */,
+				B64340582A73C16C00429307 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Misstter Extension (macOS)";
+			productName = "Misstter Extension (macOS)";
+			productReference = B643405A2A73C16C00429307 /* Misstter Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B643401E2A73C16B00429307 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					B64340302A73C16C00429307 = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+					B64340422A73C16C00429307 = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+					B643404F2A73C16C00429307 = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+					B64340592A73C16C00429307 = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+				};
+			};
+			buildConfigurationList = B64340212A73C16B00429307 /* Build configuration list for PBXProject "Misstter" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B643401D2A73C16B00429307;
+			productRefGroup = B64340322A73C16C00429307 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B64340302A73C16C00429307 /* Misstter (iOS) */,
+				B64340422A73C16C00429307 /* Misstter (macOS) */,
+				B643404F2A73C16C00429307 /* Misstter Extension (iOS) */,
+				B64340592A73C16C00429307 /* Misstter Extension (macOS) */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B643402F2A73C16C00429307 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B64340632A73C16C00429307 /* Icon.png in Resources */,
+				B643403A2A73C16C00429307 /* LaunchScreen.storyboard in Resources */,
+				B64340612A73C16C00429307 /* Main.html in Resources */,
+				B64340672A73C16C00429307 /* Script.js in Resources */,
+				B643406B2A73C16C00429307 /* Assets.xcassets in Resources */,
+				B643403D2A73C16C00429307 /* Main.storyboard in Resources */,
+				B64340652A73C16C00429307 /* Style.css in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B64340412A73C16C00429307 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B64340642A73C16C00429307 /* Icon.png in Resources */,
+				B64340662A73C16C00429307 /* Style.css in Resources */,
+				B64340492A73C16C00429307 /* Main.storyboard in Resources */,
+				B64340682A73C16C00429307 /* Script.js in Resources */,
+				B643406C2A73C16C00429307 /* Assets.xcassets in Resources */,
+				B64340622A73C16C00429307 /* Main.html in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B643404E2A73C16C00429307 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B643408C2A73C16C00429307 /* icon.png in Resources */,
+				B643408F2A73C16C00429307 /* popup.html in Resources */,
+				B64340902A73C16C00429307 /* manifest.json in Resources */,
+				B643408D2A73C16C00429307 /* js in Resources */,
+				B643408E2A73C16C00429307 /* misskey_icon.png in Resources */,
+				B64340912A73C16C00429307 /* options.html in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B64340582A73C16C00429307 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B64340862A73C16C00429307 /* icon.png in Resources */,
+				B64340892A73C16C00429307 /* popup.html in Resources */,
+				B643408A2A73C16C00429307 /* manifest.json in Resources */,
+				B64340872A73C16C00429307 /* js in Resources */,
+				B64340882A73C16C00429307 /* misskey_icon.png in Resources */,
+				B643408B2A73C16C00429307 /* options.html in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B643402D2A73C16C00429307 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B64340692A73C16C00429307 /* ViewController.swift in Sources */,
+				B64340352A73C16C00429307 /* AppDelegate.swift in Sources */,
+				B64340372A73C16C00429307 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B643403F2A73C16C00429307 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B643406A2A73C16C00429307 /* ViewController.swift in Sources */,
+				B64340462A73C16C00429307 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B643404C2A73C16C00429307 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B643406D2A73C16C00429307 /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B64340562A73C16C00429307 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B643406E2A73C16C00429307 /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B64340532A73C16C00429307 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B643404F2A73C16C00429307 /* Misstter Extension (iOS) */;
+			targetProxy = B64340522A73C16C00429307 /* PBXContainerItemProxy */;
+		};
+		B643405D2A73C16C00429307 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B64340592A73C16C00429307 /* Misstter Extension (macOS) */;
+			targetProxy = B643405C2A73C16C00429307 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		B64340242A73C16B00429307 /* Main.html */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B64340252A73C16B00429307 /* Base */,
+			);
+			name = Main.html;
+			sourceTree = "<group>";
+		};
+		B64340382A73C16C00429307 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B64340392A73C16C00429307 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		B643403B2A73C16C00429307 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B643403C2A73C16C00429307 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B64340472A73C16C00429307 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B64340482A73C16C00429307 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B643406F2A73C16C00429307 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		B64340702A73C16C00429307 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		B64340722A73C16C00429307 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Misstter Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourCompany.Misstter.Extension;
+				PRODUCT_NAME = "Misstter Extension";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B64340732A73C16C00429307 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Misstter Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourCompany.Misstter.Extension;
+				PRODUCT_NAME = "Misstter Extension";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B64340762A73C16C00429307 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Misstter;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourCompany.Misstter;
+				PRODUCT_NAME = Misstter;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B64340772A73C16C00429307 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Misstter;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourCompany.Misstter;
+				PRODUCT_NAME = Misstter;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B64340792A73C16C00429307 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "macOS (Extension)/Misstter.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Misstter Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourCompany.Misstter.Extension;
+				PRODUCT_NAME = "Misstter Extension";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		B643407A2A73C16C00429307 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "macOS (Extension)/Misstter.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Misstter Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourCompany.Misstter.Extension;
+				PRODUCT_NAME = "Misstter Extension";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		B643407D2A73C16C00429307 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "macOS (App)/Misstter.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Misstter;
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourCompany.Misstter;
+				PRODUCT_NAME = Misstter;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		B643407E2A73C16C00429307 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "macOS (App)/Misstter.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Misstter;
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourCompany.Misstter;
+				PRODUCT_NAME = Misstter;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B64340212A73C16B00429307 /* Build configuration list for PBXProject "Misstter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B643406F2A73C16C00429307 /* Debug */,
+				B64340702A73C16C00429307 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B64340712A73C16C00429307 /* Build configuration list for PBXNativeTarget "Misstter Extension (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B64340722A73C16C00429307 /* Debug */,
+				B64340732A73C16C00429307 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B64340752A73C16C00429307 /* Build configuration list for PBXNativeTarget "Misstter (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B64340762A73C16C00429307 /* Debug */,
+				B64340772A73C16C00429307 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B64340782A73C16C00429307 /* Build configuration list for PBXNativeTarget "Misstter Extension (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B64340792A73C16C00429307 /* Debug */,
+				B643407A2A73C16C00429307 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B643407C2A73C16C00429307 /* Build configuration list for PBXNativeTarget "Misstter (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B643407D2A73C16C00429307 /* Debug */,
+				B643407E2A73C16C00429307 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B643401E2A73C16B00429307 /* Project object */;
+}

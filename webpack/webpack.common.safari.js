@@ -14,7 +14,7 @@ module.exports = {
     plugins: [
         ...common.plugins,
         new CopyPlugin({
-            patterns: [{ from: ".", to: "../", context: "browser/safari" }],
+            patterns: [{ from: "./manifest.json", to: "../manifest.json", context: "browser/safari" }],
             options: {},
         })
     ]
