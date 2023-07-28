@@ -27,7 +27,6 @@ const uploadImage = async (image: Image, options: PostOptions) => {
 export const postToMisskey = async (text: string, images: Image[], options: PostOptions) => {
   let fileIDs: string[] = []
   if (images.length != 0) {
-    // showNotification('Misskeyにファイルをアップロードしています...', 'success')
     fileIDs = await Promise.all(images.map(image => uploadImage(image, options) ))   
   }
 
@@ -38,21 +37,14 @@ export const postToMisskey = async (text: string, images: Image[], options: Post
   if (options.sensitive) { body["isSensitive"] = true }
   if (options.scope) { body["visibility"] = options.scope }
 
-  try {
-    const res = await fetch(`${options.server}/api/notes/create`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', },
-      body: JSON.stringify(body),
-    })
-    if (res.status != 200) {
-      const errorRes = await res.json()
-      const message = errorRes["error"]["message"]
-      // showNotification(`Misskeyへの投稿に失敗しました。${message}`, 'error')
-      return;
-    }
-    // showNotification('Misskeyへの投稿に成功しました。', 'success')
-  } catch (e) {
-    // showNotification('Misskeyへの投稿に失敗しました。', 'error')
-    return
+  const res = await fetch(`${options.server}/api/notes/create`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', },
+    body: JSON.stringify(body),
+  })
+  if (res.status != 200) {
+    const errorRes = await res.json()
+    const message = errorRes["error"]["message"]
+    throw new Error(message)
   }
 }

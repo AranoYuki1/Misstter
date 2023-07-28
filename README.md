@@ -55,7 +55,11 @@ npm install
 ## Build
 
 ```
-npm run build
+# chrome
+npm run build_chrome
+
+# firefox
+npm run build_firefox
 ```
 
 ## Build in watch mode
@@ -63,12 +67,16 @@ npm run build
 ### terminal
 
 ```
-npm run watch
+# chrome
+npm run watch_chrome
+
+# firefox
+npm run watch_firefox
 ```
 
-## Load extension to chrome
+## Load extension to browser
 
-Load `dist` directory
+Load `dist/[browser_name]` directory
 
 ## Test
 
