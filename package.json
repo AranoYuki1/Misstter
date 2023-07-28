@@ -6,8 +6,14 @@
   "scripts": {
     "watch_chrome": "webpack --config webpack/webpack.dev.chrome.js --watch",
     "build_chrome": "webpack --config webpack/webpack.prod.chrome.js",
+    
     "watch_firefox": "webpack --config webpack/webpack.dev.firefox.js --watch",
     "build_firefox": "webpack --config webpack/webpack.prod.firefox.js",
+    
+    "watch_safari": "webpack --config webpack/webpack.dev.safari.js --watch",
+    "build_safari": "webpack --config webpack/webpack.prod.safari.js",
+    
+
     "clean": "rimraf dist",
     "test": "npx jest",
     "style": "prettier --write \"src/**/*.{ts,tsx}\""
