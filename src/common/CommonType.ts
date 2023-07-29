@@ -31,9 +31,3 @@ export type PostResponse = {
   success: boolean,
   errorMessage: string
 }
-
-export type Notification = {
-  type: 'notification',
-  message: string,
-  level: 'success' | 'error'
-}

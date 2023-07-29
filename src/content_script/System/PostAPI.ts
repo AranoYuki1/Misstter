@@ -1,12 +1,7 @@
 import browser from 'webextension-polyfill';
-import { showNotification } from '../UI/Notification';
-import { Image, PostOptions, PostMessage, Notification } from "../../common/CommonType"
+import { showNotification, Notification } from '../UI/Notification';
+import { Image, PostOptions, PostMessage } from "../../common/CommonType"
 import { getBrowserName } from "../../common/browser"
-
-browser.runtime.onMessage.addListener((message: Notification) => {
-  if (message.type != 'notification') return;
-  showNotification(message.message, message.level)
-})
 
 const blobToBase64 = (blob: Blob) => {
   return new Promise<string>((resolve, reject) => {
@@ -51,11 +46,14 @@ export const postToMisskey = async (text: string, images: Image[], options: Post
     options: options,
   }
 
+  let imageNotification: Notification|undefined = undefined
+
   if (imageData.length != 0) {
-    showNotification('画像をアップロードしています...', 'success')
+    imageNotification = showNotification('画像をアップロードしています...', 'success', 1000_0000)
   }
 
   try {
+    imageNotification?.close()
     await browser.runtime.sendMessage(postMessage)
     showNotification('Misskeyへの投稿に成功しました', 'success')
   } catch (error: any) {

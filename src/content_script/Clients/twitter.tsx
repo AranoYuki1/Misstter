@@ -3,6 +3,7 @@ import { REPLY_BUTTON_LABELS } from '../../common/Constants';
 import { createScopeButton, scopeButtonClassName } from "../UI/ScopeButton"
 import { createMisskeyPostButton, misskeyButtonClassName, syncDisableState } from "../UI/MisskeyPostButton"
 import { createMisskeyImageOptionButton } from "../UI/ImageFlagButton"
+import { showNotification } from '../UI/Notification';
 
 const gifButtonSelector = 'div[data-testid="gifSearchButton"]'
 const buttonSelector = 'div[data-testid="tweetButton"], div[data-testid="tweetButtonInline"]'

@@ -1,16 +1,41 @@
 
 export type NotificationType = 'success' | 'error' 
-export type Notification = {
+
+export class Notification {
   text: string;
   type: NotificationType;
+  duration: number;
+
+  close() {
+    console.log('close', this)
+    this._close();
+  }
+
+  _close!: () => void;
+  _closePromise: Promise<void>;
+  
+  constructor(text: string, type: NotificationType, duration: number) {
+    this.text = text;
+    this.type = type;
+    this.duration = duration;
+    this._closePromise = new Promise((resolve) => {
+      this._close = resolve;
+    })
+  }
 }
 
 const notificationStack: Notification[] = [];
 
 let currentNotification: Notification | null = null;
 
-const createNotification = (notification: Notification) => {
+const _showNotification = (notification: Notification) => {
+  if (currentNotification) {
+    notificationStack.push(notification);
+    return;
+  }
+
   currentNotification = notification;
+
   const notificationBar = document.createElement('div');
   notificationBar.textContent = notification.text;
   notificationBar.style.position = 'fixed';
@@ -40,26 +65,28 @@ const createNotification = (notification: Notification) => {
   }, 0);
 
   document.body.appendChild(notificationBar);
-  setTimeout(() => {
-      notificationBar.style.opacity = '0';
-      setTimeout(() => {
-        document.body.removeChild(notificationBar);
-        
-        if (notificationStack.length == 0) return;
 
-        const nextNotification = notificationStack.shift();
-        if (nextNotification) {
-          createNotification(nextNotification);
-        }
-      }, 2000);
-  }, 2000);
+  notification._closePromise.then(() => {
+    notificationBar.style.opacity = '0';
+
+    setTimeout(() => {
+      document.body.removeChild(notificationBar);
+    }, 2000);
+
+    currentNotification = null;
+    const nextNotification = notificationStack.shift();
+
+    if (nextNotification) { _showNotification(nextNotification); }
+  });
+
+  setTimeout(() => { notification.close(); }, notification.duration);
+
 }
 
-export const showNotification = (text: string, type: NotificationType) => {
-  if (currentNotification) {
-    notificationStack.push({ text, type });
-    return;
-  }
+export const showNotification = (text: string, type: NotificationType, duration: number = 2000) => {
+  const notification = new Notification(text, type, duration);
+  
+  _showNotification(notification);
 
-  createNotification({ text, type });
+  return notification;
 }
