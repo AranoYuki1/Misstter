@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B62721672A74148400183A16 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B62721662A74148400183A16 /* Icon.png */; };
+		B62721682A74148400183A16 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B62721662A74148400183A16 /* Icon.png */; };
+		B627216A2A74154000183A16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B62721692A74154000183A16 /* Assets.xcassets */; };
+		B627216B2A74154000183A16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B62721692A74154000183A16 /* Assets.xcassets */; };
 		B64340352A73C16C00429307 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64340342A73C16C00429307 /* AppDelegate.swift */; };
 		B64340372A73C16C00429307 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64340362A73C16C00429307 /* SceneDelegate.swift */; };
 		B643403A2A73C16C00429307 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B64340382A73C16C00429307 /* LaunchScreen.storyboard */; };
@@ -17,8 +21,6 @@
 		B643405B2A73C16C00429307 /* Misstter Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B643405A2A73C16C00429307 /* Misstter Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B64340612A73C16C00429307 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = B64340242A73C16B00429307 /* Main.html */; };
 		B64340622A73C16C00429307 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = B64340242A73C16B00429307 /* Main.html */; };
-		B64340632A73C16C00429307 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B64340262A73C16B00429307 /* Icon.png */; };
-		B64340642A73C16C00429307 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B64340262A73C16B00429307 /* Icon.png */; };
 		B64340652A73C16C00429307 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = B64340272A73C16B00429307 /* Style.css */; };
 		B64340662A73C16C00429307 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = B64340272A73C16B00429307 /* Style.css */; };
 		B64340672A73C16C00429307 /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = B64340282A73C16B00429307 /* Script.js */; };
@@ -86,8 +88,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B62721662A74148400183A16 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		B62721692A74154000183A16 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B64340252A73C16B00429307 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = ../Base.lproj/Main.html; sourceTree = "<group>"; };
-		B64340262A73C16B00429307 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		B64340272A73C16B00429307 /* Style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = Style.css; sourceTree = "<group>"; };
 		B64340282A73C16B00429307 /* Script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Script.js; sourceTree = "<group>"; };
 		B64340292A73C16B00429307 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -176,7 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				B64340242A73C16B00429307 /* Main.html */,
-				B64340262A73C16B00429307 /* Icon.png */,
+				B62721662A74148400183A16 /* Icon.png */,
 				B64340272A73C16B00429307 /* Style.css */,
 				B64340282A73C16B00429307 /* Script.js */,
 			);
@@ -222,6 +225,7 @@
 				B64340472A73C16C00429307 /* Main.storyboard */,
 				B643404A2A73C16C00429307 /* Info.plist */,
 				B643404B2A73C16C00429307 /* Misstter.entitlements */,
+				B62721692A74154000183A16 /* Assets.xcassets */,
 			);
 			path = "macOS (App)";
 			sourceTree = "<group>";
@@ -382,12 +386,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B64340632A73C16C00429307 /* Icon.png in Resources */,
 				B643403A2A73C16C00429307 /* LaunchScreen.storyboard in Resources */,
 				B64340612A73C16C00429307 /* Main.html in Resources */,
 				B64340672A73C16C00429307 /* Script.js in Resources */,
 				B643406B2A73C16C00429307 /* Assets.xcassets in Resources */,
 				B643403D2A73C16C00429307 /* Main.storyboard in Resources */,
+				B62721672A74148400183A16 /* Icon.png in Resources */,
+				B627216A2A74154000183A16 /* Assets.xcassets in Resources */,
 				B64340652A73C16C00429307 /* Style.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -396,10 +401,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B64340642A73C16C00429307 /* Icon.png in Resources */,
+				B62721682A74148400183A16 /* Icon.png in Resources */,
 				B64340662A73C16C00429307 /* Style.css in Resources */,
 				B64340492A73C16C00429307 /* Main.storyboard in Resources */,
 				B64340682A73C16C00429307 /* Script.js in Resources */,
+				B627216B2A74154000183A16 /* Assets.xcassets in Resources */,
 				B643406C2A73C16C00429307 /* Assets.xcassets in Resources */,
 				B64340622A73C16C00429307 /* Main.html in Resources */,
 			);
@@ -634,6 +640,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Misstter Extension";
@@ -644,12 +651,12 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.3;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yourCompany.Misstter.Extension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yuki.Misstter.Extension;
 				PRODUCT_NAME = "Misstter Extension";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -664,6 +671,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Misstter Extension";
@@ -674,12 +682,12 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.3;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yourCompany.Misstter.Extension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yuki.Misstter.Extension;
 				PRODUCT_NAME = "Misstter Extension";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -698,6 +706,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (App)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Misstter;
@@ -718,7 +727,7 @@
 					"-framework",
 					WebKit,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yourCompany.Misstter;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yuki.Misstter;
 				PRODUCT_NAME = Misstter;
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -735,6 +744,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (App)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Misstter;
@@ -755,7 +765,7 @@
 					"-framework",
 					WebKit,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yourCompany.Misstter;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yuki.Misstter;
 				PRODUCT_NAME = Misstter;
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -769,8 +779,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "macOS (Extension)/Misstter.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T5HMUWWK5R;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
@@ -782,12 +794,12 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.3;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yourCompany.Misstter.Extension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yuki.Misstter.Extension;
 				PRODUCT_NAME = "Misstter Extension";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -800,8 +812,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "macOS (Extension)/Misstter.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T5HMUWWK5R;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
@@ -813,12 +827,12 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.3;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yourCompany.Misstter.Extension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yuki.Misstter.Extension;
 				PRODUCT_NAME = "Misstter Extension";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -836,6 +850,7 @@
 				CODE_SIGN_ENTITLEMENTS = "macOS (App)/Misstter.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T5HMUWWK5R;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "macOS (App)/Info.plist";
@@ -847,14 +862,14 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.3;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
 					"-framework",
 					WebKit,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yourCompany.Misstter;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yuki.Misstter;
 				PRODUCT_NAME = Misstter;
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -871,6 +886,7 @@
 				CODE_SIGN_ENTITLEMENTS = "macOS (App)/Misstter.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T5HMUWWK5R;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "macOS (App)/Info.plist";
@@ -882,14 +898,14 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.3;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
 					"-framework",
 					WebKit,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yourCompany.Misstter;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yuki.Misstter;
 				PRODUCT_NAME = Misstter;
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;

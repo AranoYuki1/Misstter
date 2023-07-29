@@ -3,7 +3,11 @@ export type Image = {
   isSensitive: boolean
 }
 
-
+// if browser is Safari, image.base64 is used instead of image.blob
+export type ImageData = {
+  imageData: Blob | string,
+  isSensitive: boolean
+}
 
 export type Scope = 'public' | 'home' | 'followers'
 
@@ -18,7 +22,7 @@ export type PostOptions = {
 export type PostMessage = {
   type: 'post',
   text: string,
-  images: Image[],
+  images: ImageData[],
   options: PostOptions
 }
 

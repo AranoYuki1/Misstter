@@ -6,6 +6,7 @@ export type Scope = 'public' | 'home' | 'followers';
 
 const createScopeModal = (callback: (scope: Scope) => void) => {
   const modal = document.createElement('div');
+  modal.style.fontFamily = 'sans-serif';
   modal.style.position = 'absolute';
   modal.style.width = '200px';
   modal.style.minWidth = '200px';

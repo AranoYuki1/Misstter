@@ -36,8 +36,10 @@ const addMisskeyImageOptionButton = (editButton: HTMLElement, attachmentsImage: 
 const foundTweetButtonHandler = (tweetButton: HTMLElement) => {
   if (!tweetButton) return;
 
+  const buttonText = tweetButton.innerText.trim();
+
   // リプライボタンの場合は後続の処理を行わない
-  const isReplyButton = REPLY_BUTTON_LABELS.indexOf(tweetButton.innerText) !== -1;
+  const isReplyButton = REPLY_BUTTON_LABELS.indexOf(buttonText) !== -1;
   if (isReplyButton) return;
 
   // add misskey post button

@@ -1,11 +1,21 @@
-import { Image, PostOptions } from "../common/CommonType"
+import { Image, ImageData, PostOptions } from "../common/CommonType"
 
-const uploadImage = async (image: Image, options: PostOptions) => {
-  const blob = image.blob
+const getBlob = async (imageData: Blob | string) => {
+  if (typeof imageData == 'string') {
+    const res = await fetch(imageData)
+    return await res.blob()
+  } else {
+    return imageData
+  }
+}
+
+const uploadImage = async (image: ImageData, options: PostOptions) => {
+  const blob = await getBlob(image.imageData)
   const formData  = new FormData();
   // create UUID
   const filename = `${Date.now()}.png`
-  formData.append('file', blob, `${filename}.png`);
+  formData.append('file', blob, filename);
+  // formData.append('file', blob, `${filename}.png`);
   formData.append('i', options.token);
   formData.append('name', filename);
 
@@ -24,7 +34,7 @@ const uploadImage = async (image: Image, options: PostOptions) => {
   return fileID
 }
 
-export const postToMisskey = async (text: string, images: Image[], options: PostOptions) => {
+export const postToMisskey = async (text: string, images: ImageData[], options: PostOptions) => {
   let fileIDs: string[] = []
   if (images.length != 0) {
     fileIDs = await Promise.all(images.map(image => uploadImage(image, options) ))   
