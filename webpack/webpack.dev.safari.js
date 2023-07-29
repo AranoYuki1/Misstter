@@ -1,3 +1,13 @@
+const CopyPlugin = require("copy-webpack-plugin");
 const common = require('./webpack.common.js');
 
-module.exports = common("safari", "development")
+const defaultConfig = common('safari', 'development');
+
+defaultConfig.plugins.push(
+  new CopyPlugin({
+    patterns: [{ from: "./icons/", to: "../icons/", context: `browser/safari` }],
+    options: {},
+  }),
+);
+
+module.exports = defaultConfig
