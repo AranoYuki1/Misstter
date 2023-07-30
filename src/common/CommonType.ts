@@ -1,11 +1,10 @@
-export type Image = {
+export type Attachment = {
   blob: Blob,
   isSensitive: boolean
 }
 
-// if browser is Safari, image.base64 is used instead of image.blob
-export type ImageData = {
-  imageData: Blob | string,
+export type AttachmentData = {
+  data: string,
   isSensitive: boolean
 }
 
@@ -22,12 +21,7 @@ export type PostOptions = {
 export type PostMessage = {
   type: 'post',
   text: string,
-  images: ImageData[],
+  attachments: AttachmentData[],
   options: PostOptions
 }
 
-export type PostResponse = {
-  type: 'postResponse',
-  success: boolean,
-  errorMessage: string
-}

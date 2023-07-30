@@ -3,7 +3,7 @@ import { showNotification } from '../UI/Notification'
 import { Scope } from '../UI/ScopeModal';
 import { misskeyFlagAttribute, misskeyFlagClassName } from '../UI/ImageFlagButton';
 import { getCW, getScope, getSensitive, getServer, getToken } from "./StorageReader"
-import { Image } from '../../common/CommonType';
+import { Attachment } from '../../common/CommonType';
 
 const getTweetText = () => {
   const textContents = document.querySelectorAll('div[data-testid="tweetTextarea_0"] div[data-block="true"]');
@@ -15,10 +15,23 @@ const getTweetText = () => {
   return text;
 }
 
-const getTweetImages: () => Promise<Image[]> = async () => {
+const getTweetVideo = async () => {
+  const video = document.querySelector("div[data-testid='attachments'] video > source");
+  if (!video) return null;
+  const videoRoot = video.parentElement?.parentElement
+  const flagButton = videoRoot?.querySelector(`.${misskeyFlagClassName}`)
+  const isFlagged = flagButton?.getAttribute(misskeyFlagAttribute) === "true" ?? false
+  const url = video.getAttribute('src');
+  if (!url) return null;
+  if (!url.startsWith("blob:")) return null;
+  const blob = await fetch(url).then(res => res.blob())
+  return { blob: blob, isSensitive: isFlagged };
+}
+
+const getTweetImages: () => Promise<Attachment[]> = async () => {
   const images = document.querySelectorAll("div[data-testid='attachments'] img");
 
-  const res: Image[] = []
+  const res: Attachment[] = []
 
   for (const image of images) {
     const imageRoot = image.parentElement?.parentElement?.parentElement?.parentElement
@@ -35,18 +48,24 @@ const getTweetImages: () => Promise<Image[]> = async () => {
 }
 
 export const tweetToMisskey = async () => {
-  const text = getTweetText();
-  const images = await getTweetImages();
-
-  if (!text && images.length == 0) {
-    showNotification('Misskeyへの投稿内容がありません', 'error')
-    return;
+  try {
+    const text = getTweetText();
+    const images = await getTweetImages();
+    const video = await getTweetVideo();
+  
+    if (!text && images.length == 0 && !video) {
+      showNotification('Misskeyへの投稿内容がありません', 'error')
+      return;
+    }
+  
+    const [token, server, cw, sensitive, scope] = await Promise.all([
+      getToken(), getServer(), getCW(), getSensitive(), getScope(),
+    ])
+  
+    const options = { cw, token, server, sensitive, scope: scope as Scope }
+    await postToMisskey(text ?? "", images, video, options);
+  } catch (e) {
+    console.error(e)
+    showNotification('Misskeyへの投稿に失敗しました', 'error')
   }
-
-  const [token, server, cw, sensitive, scope] = await Promise.all([
-    getToken(), getServer(), getCW(), getSensitive(), getScope(),
-  ])
-
-  const options = { cw, token, server, sensitive, scope: scope as Scope }
-  await postToMisskey(text ?? "", images, options);
 }

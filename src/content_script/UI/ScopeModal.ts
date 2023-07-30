@@ -141,8 +141,8 @@ const createScopeModal = (callback: (scope: Scope) => void) => {
     }
   });
 
-  setInterval(() => {
-    updateSelection();
+  const checkID = setInterval(() => {
+    try { updateSelection(); } catch (e) { clearInterval(checkID); }
   }, 2000);
   updateSelection();
 

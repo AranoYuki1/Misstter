@@ -56,9 +56,6 @@ const foundAttachmentsImageHandler = (attachmentsImage: HTMLElement) => {
   // すでにボタンがある場合は何もしない
   if (attachmentsImage.getAttribute('data-has-flag-button')) return;
   attachmentsImage.setAttribute('data-has-flag-button', 'true');
-
-  const isVideo = attachmentsImage.querySelector("video") !== null;
-  if (isVideo) return;
   
   const editButton = Array.from(attachmentsImage.querySelectorAll("div[role='button']"))[1] as HTMLElement;
   if (!editButton) return;

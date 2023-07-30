@@ -5,6 +5,6 @@ import { postToMisskey } from "./MisskeyAPI"
 browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type == 'post') {
     const postMessage = message as PostMessage
-    return postToMisskey(postMessage.text, postMessage.images, postMessage.options)
+    return postToMisskey(postMessage.text, postMessage.attachments, postMessage.options)
   }
 });
