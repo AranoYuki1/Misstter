@@ -10,16 +10,18 @@ const Popup = () => {
   const [cw, setCw] = useState<boolean | null>(null)
   const [sensitive, setSensitive] = useState<boolean | null>(null)
   const [showAccess, setShowAccess] = useState<boolean | null>(null)
-  const [showLocalOnly, setShowLocalOnly] = useState<boolean|null>(null)
+  const [showLocalOnly, setShowLocalOnly] = useState<boolean | null>(null)
+  const [autoTweet, setAutoTweet] = useState<boolean | null>(null)
 
   useEffect(() => {
-    browser.storage.sync.get(['misskey_token', 'misskey_server', 'misskey_cw', 'misskey_sensitive', 'misskey_access', "misskey_show_local_only"]).then((result) => {
+    browser.storage.sync.get(['misskey_token', 'misskey_server', 'misskey_cw', 'misskey_sensitive', 'misskey_access', "misskey_show_local_only", "misskey_auto_tweet"]).then((result) => {
       const token = result?.misskey_token; if (token) { setToken(token) }
       const server = result?.misskey_server; if (server) { setServer(server) }
       setCw(result?.misskey_cw)
       setSensitive(result?.misskey_sensitive)
       setShowAccess(result?.misskey_access)
       setShowLocalOnly(result?.misskey_show_local_only)
+      setAutoTweet(result?.misskey_auto_tweet)
     })
   }, [])
   
@@ -46,9 +48,13 @@ const Popup = () => {
     setShowAccess(access)
     browser.storage.sync.set({ misskey_access: access })
   }
-  const updateShowLocalOnly = (showLocalOnly: boolean): void => {
+  const updateShowLocalOnly = (showLocalOnly: boolean) => {
       setShowLocalOnly(showLocalOnly)
       browser.storage.sync.set({misskey_show_local_only: showLocalOnly})
+  }
+  const updateAutoTweet = (autoTweet: boolean) => {
+      setAutoTweet(autoTweet)
+      browser.storage.sync.set({misskey_auto_tweet: autoTweet})
   }
 
   const openDonationPage = () => {
@@ -144,6 +150,16 @@ const Popup = () => {
               }}
           />}
           label={<Typography style={{ fontSize: 15 }}>投稿の連合なし設定ボタンを表示する。</Typography>}
+        />
+
+        <FormControlLabel
+          control={<Checkbox
+              checked={autoTweet ?? false}
+              onChange={(e) => {
+                  updateAutoTweet(e.target.checked)
+              }}
+          />}
+          label={<Typography style={{ fontSize: 15 }}>Misskeyへの投稿後自動的にツイートする。</Typography>}
         />
 
         <Typography

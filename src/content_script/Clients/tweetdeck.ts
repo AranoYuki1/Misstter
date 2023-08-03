@@ -11,7 +11,7 @@ const addMisskeyPostButton = (tweetButton: HTMLElement, tweetBox: HTMLElement) =
   // すでにボタンがある場合は何もしない
   if (tweetBox.querySelector(`.${misskeyButtonClassName}`)) return;
 
-  const misskeybutton = createMisskeyPostButton(tweetToMisskey);  
+  const misskeybutton = createMisskeyPostButton(tweetToMisskey, tweetButton);
   misskeybutton.style.width = "40px"
   misskeybutton.style.height = "30px"
   misskeybutton.style.marginLeft = "8px"

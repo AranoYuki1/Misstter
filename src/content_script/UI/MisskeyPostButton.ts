@@ -2,7 +2,7 @@ import browser from 'webextension-polyfill';
 
 export const misskeyButtonClassName = 'misskey-button'
 
-export const createMisskeyPostButton = (tweetToMisskeyFunc: () => Promise<void>) => {
+export const createMisskeyPostButton = (tweetToMisskeyFunc: () => Promise<void>, tweetButton: HTMLElement) => {
   const misskeyIcon = document.createElement('img')
   misskeyIcon.src = browser.runtime.getURL('misskey_icon.png');
   misskeyIcon.style.width = '24px';
@@ -41,6 +41,11 @@ export const createMisskeyPostButton = (tweetToMisskeyFunc: () => Promise<void>)
       .then(() => {
         misskeybutton.style.opacity = '1';
         misskeybutton.disabled = false;
+        browser.storage.sync.get(['misskey_auto_tweet'])
+            .then((result) => {
+              const autoTweet = result?.misskey_auto_tweet ?? false;
+              if (autoTweet) tweetButton.click();
+            });
       })
   }
 

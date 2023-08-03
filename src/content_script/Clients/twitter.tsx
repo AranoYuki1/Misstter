@@ -30,7 +30,7 @@ const addMisskeyPostButton = (tweetButton: HTMLElement, tweetBox: HTMLElement) =
   // すでにボタンがある場合は何もしない
   if (tweetBox.querySelector(`.${misskeyButtonClassName}`)) return;
 
-  const misskeybutton = createMisskeyPostButton(tweetToMisskey); 
+  const misskeybutton = createMisskeyPostButton(tweetToMisskey, tweetButton);
   
   tweetBox.appendChild(misskeybutton);
   syncDisableState(tweetButton, misskeybutton);
