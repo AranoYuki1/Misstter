@@ -1,9 +1,10 @@
 import { tweetToMisskey } from '../System/TwitterCrawler';
-import { REPLY_BUTTON_LABELS } from '../../common/Constants';
+import { REPLY_BUTTON_LABELS } from '../../common/constants';
 import { createScopeButton, scopeButtonClassName } from "../UI/ScopeButton"
 import { createMisskeyPostButton, misskeyButtonClassName, syncDisableState } from "../UI/MisskeyPostButton"
 import { createMisskeyImageOptionButton } from "../UI/ImageFlagButton"
 import { showNotification } from '../UI/Notification';
+import { createLocalOnlyButton, localOnlyButtonClassName } from "../UI/LocalOnlyButton";
 
 const gifButtonSelector = 'div[data-testid="gifSearchButton"]'
 const buttonSelector = 'div[data-testid="tweetButton"], div[data-testid="tweetButtonInline"]'
@@ -15,6 +16,13 @@ const addScopeButton = (iconBox: HTMLElement) => {
   if (iconBox.querySelector(`.${scopeButtonClassName}`)) return;
   const scopeButton = createScopeButton();
   iconBox.appendChild(scopeButton);
+}
+
+// 連合なしボタンを作成する
+const addLocalOnlyButton = (iconBox: HTMLElement) => {
+  if (iconBox.querySelector(`.${localOnlyButtonClassName}`)) return;
+  const localOnlyButton = createLocalOnlyButton();
+  iconBox.appendChild(localOnlyButton);
 }
 
 // ミスキーへの投稿ボタンを追加する
@@ -47,9 +55,12 @@ const foundTweetButtonHandler = (tweetButton: HTMLElement) => {
   const tweetBox = tweetButton.parentElement as HTMLElement;
   if (tweetBox) { addMisskeyPostButton(tweetButton, tweetBox); }
 
-  // add scope button
+  // add scope button and local only button
   const iconsBlock = document.querySelector(gifButtonSelector)?.parentElement as HTMLElement
-  if (iconsBlock) { addScopeButton(iconsBlock); }
+  if (iconsBlock) {
+    addScopeButton(iconsBlock);
+    addLocalOnlyButton(iconsBlock);
+  }
 }
 
 const foundAttachmentsImageHandler = (attachmentsImage: HTMLElement) => {

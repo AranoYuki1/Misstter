@@ -15,7 +15,8 @@ export type PostOptions = {
   token: string,
   server: string,
   sensitive: boolean,
-  scope: Scope
+  scope: Scope,
+  localOnly: boolean
 }
 
 export type PostMessage = {

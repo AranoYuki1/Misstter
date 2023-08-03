@@ -39,6 +39,7 @@ export const postToMisskey = async (text: string, attachments: AttachmentData[],
   if (fileIDs.length > 0) { body["fileIds"] = fileIDs }
   if (options.cw) { body["cw"] = "" }
   if (options.scope) { body["visibility"] = options.scope }
+  if (options.localOnly) { body["localOnly"] = options.localOnly }
 
   const res = await fetch(`${options.server}/api/notes/create`, {
     method: 'POST',

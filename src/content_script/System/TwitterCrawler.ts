@@ -2,7 +2,7 @@ import { postToMisskey } from './PostAPI'
 import { showNotification } from '../UI/Notification'
 import { Scope } from '../UI/ScopeModal';
 import { misskeyFlagAttribute, misskeyFlagClassName } from '../UI/ImageFlagButton';
-import { getCW, getScope, getSensitive, getServer, getToken } from "./StorageReader"
+import {getCW, getLocalOnly, getScope, getSensitive, getServer, getToken} from "./StorageReader"
 import { Attachment } from '../../common/CommonType';
 
 const getTweetText = () => {
@@ -58,11 +58,11 @@ export const tweetToMisskey = async () => {
       return;
     }
   
-    const [token, server, cw, sensitive, scope] = await Promise.all([
-      getToken(), getServer(), getCW(), getSensitive(), getScope(),
+    const [token, server, cw, sensitive, scope, localOnly] = await Promise.all([
+      getToken(), getServer(), getCW(), getSensitive(), getScope(), getLocalOnly(),
     ])
   
-    const options = { cw, token, server, sensitive, scope: scope as Scope }
+    const options = { cw, token, server, sensitive, scope: scope as Scope, localOnly }
     await postToMisskey(text ?? "", images, video, options);
   } catch (e) {
     console.error(e)

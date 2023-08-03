@@ -1,6 +1,6 @@
 import browser from 'webextension-polyfill';
 
-import { DEFAULT_INSTANCE_URL } from '../../common/Constants';
+import { DEFAULT_INSTANCE_URL } from '../../common/constants';
 import { showNotification } from '../UI/Notification'
 
 export const getToken = async () => {
@@ -47,6 +47,14 @@ export const getScope = async () => {
   return await new Promise<string>((resolve, reject) => {
     browser.storage.sync.get(['misskey_scope']).then((result) => {
       resolve(result?.misskey_scope ?? "public")
+    })
+  })
+}
+
+export const getLocalOnly = async () => {
+  return await new Promise<boolean>((resolve, reject) => {
+    browser.storage.sync.get(['misskey_local_only']).then((result) => {
+      resolve(result?.misskey_local_only ?? false)
     })
   })
 }

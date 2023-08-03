@@ -9,6 +9,7 @@ export const createMisskeyImageOptionButton = () => {
   misskeybutton.style.fill = 'rgb(255, 255, 255)';
   misskeybutton.className = misskeyFlagClassName;
   misskeybutton.style.backgroundColor = "rgba(15, 20, 25, 0.75)"
+  // @ts-ignore
   misskeybutton.style.backdropFilter = "blur(4px)"
   misskeybutton.style.borderRadius = '9999px';
   misskeybutton.style.height = '32px';

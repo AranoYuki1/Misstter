@@ -2,22 +2,24 @@ import browser from 'webextension-polyfill';
 import React, { useEffect, useState } from "react"
 import ReactDOM from "react-dom"
 import { Container, Typography, AppBar, Toolbar, TextField, FormControlLabel, Checkbox } from "@mui/material"
-import { DEFAULT_INSTANCE_URL } from "../common/Constants";
+import { DEFAULT_INSTANCE_URL } from "../common/constants";
 
 const Popup = () => {
   const [token, setToken] = useState<string | null>(null)
   const [server, setServer] = useState<string | null>(DEFAULT_INSTANCE_URL);
   const [cw, setCw] = useState<boolean | null>(null)
   const [sensitive, setSensitive] = useState<boolean | null>(null)
-  const [showAccess, setShowAccess] = useState<boolean|null>(null)
+  const [showAccess, setShowAccess] = useState<boolean | null>(null)
+  const [showLocalOnly, setShowLocalOnly] = useState<boolean|null>(null)
 
   useEffect(() => {
-    browser.storage.sync.get(['misskey_token', 'misskey_server', 'misskey_cw', 'misskey_sensitive', 'misskey_access']).then((result) => {
+    browser.storage.sync.get(['misskey_token', 'misskey_server', 'misskey_cw', 'misskey_sensitive', 'misskey_access', "misskey_show_local_only"]).then((result) => {
       const token = result?.misskey_token; if (token) { setToken(token) }
       const server = result?.misskey_server; if (server) { setServer(server) }
       setCw(result?.misskey_cw)
       setSensitive(result?.misskey_sensitive)
       setShowAccess(result?.misskey_access)
+      setShowLocalOnly(result?.misskey_show_local_only)
     })
   }, [])
   
@@ -43,6 +45,10 @@ const Popup = () => {
   const updateAccess = (access: boolean) => {
     setShowAccess(access)
     browser.storage.sync.set({ misskey_access: access })
+  }
+  const updateShowLocalOnly = (showLocalOnly: boolean): void => {
+      setShowLocalOnly(showLocalOnly)
+      browser.storage.sync.set({misskey_show_local_only: showLocalOnly})
   }
 
   const openDonationPage = () => {
@@ -128,6 +134,16 @@ const Popup = () => {
             }}
           />}
           label={<Typography style={{ fontSize: 15 }}>投稿の公開範囲設定ボタンを表示する。</Typography>}
+        />
+
+        <FormControlLabel
+          control={<Checkbox
+              checked={showLocalOnly ?? true}
+              onChange={(e) => {
+                  updateShowLocalOnly(e.target.checked)
+              }}
+          />}
+          label={<Typography style={{ fontSize: 15 }}>投稿の連合なし設定ボタンを表示する。</Typography>}
         />
 
         <Typography
