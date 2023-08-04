@@ -14,7 +14,7 @@ const Popup = () => {
   const [autoTweet, setAutoTweet] = useState<boolean | null>(null)
 
   useEffect(() => {
-    browser.storage.sync.get(['misskey_token', 'misskey_server', 'misskey_cw', 'misskey_sensitive', 'misskey_access', "misskey_show_local_only", "misskey_auto_tweet"]).then((result) => {
+    browser.storage.sync.get(['misskey_token', 'misskey_server', 'misskey_cw', 'misskey_sensitive', 'misskey_access', 'misskey_show_local_only', 'misskey_auto_tweet']).then((result) => {
       const token = result?.misskey_token; if (token) { setToken(token) }
       const server = result?.misskey_server; if (server) { setServer(server) }
       setCw(result?.misskey_cw)

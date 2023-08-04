@@ -4,7 +4,7 @@ import { createMisskeyPostButton, misskeyButtonClassName, syncDisableState } fro
 import { createMisskeyImageOptionButton } from "../UI/ImageFlagButton"
 // DeckではTwitterCrawlerがそのまま使用可能
 import { tweetToMisskey } from '../System/TwitterCrawler';
-import {createLocalOnlyButton, localOnlyButtonClassName} from "../UI/LocalOnlyButton";
+import { createLocalOnlyButton, localOnlyButtonClassName } from "../UI/LocalOnlyButton";
 
 // ミスキーへの投稿ボタンを追加する
 const addMisskeyPostButton = (tweetButton: HTMLElement, tweetBox: HTMLElement) => {

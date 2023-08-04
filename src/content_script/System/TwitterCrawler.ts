@@ -2,7 +2,7 @@ import { postToMisskey } from './PostAPI'
 import { showNotification } from '../UI/Notification'
 import { Scope } from '../UI/ScopeModal';
 import { misskeyFlagAttribute, misskeyFlagClassName } from '../UI/ImageFlagButton';
-import {getCW, getLocalOnly, getScope, getSensitive, getServer, getToken} from "./StorageReader"
+import { getCW, getLocalOnly, getScope, getSensitive, getServer, getToken } from "./StorageReader"
 import { Attachment } from '../../common/CommonType';
 
 const getTweetText = () => {

@@ -1,6 +1,5 @@
 import browser from 'webextension-polyfill';
-import {global_icon, home_scope_icon, local_only_icon, lock_scope_icon, public_scope_icon} from "./Icons";
-import {Scope} from "./ScopeModal";
+import { global_icon, local_only_icon } from "./Icons";
 
 export const localOnlyButtonClassName = 'misskey-local-only-button'
 
