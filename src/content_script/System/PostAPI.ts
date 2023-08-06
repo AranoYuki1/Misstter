@@ -48,7 +48,7 @@ export const postToMisskey = async (text: string, images: Attachment[], video: A
  
   try {
     uploadNotification?.close()
-    await browser.runtime.sendMessage(postMessage)
+    // await browser.runtime.sendMessage(postMessage)
     showNotification('Misskeyへの投稿に成功しました', 'success')
   } catch (error: any) {
     showNotification(error.message, 'error')

@@ -5,5 +5,4 @@ if (location.hostname === 'twitter.com') {
 } else if (location.hostname === "tweetdeck.twitter.com") {
   // is current location is tweetdeck.twitter.com load tweetdeck content script
   import('./Clients/tweetdeck');
-
-}
+} 
