@@ -3,7 +3,6 @@ import { REPLY_BUTTON_LABELS } from '../../common/constants';
 import { createScopeButton, scopeButtonClassName } from "../UI/ScopeButton"
 import { createMisskeyPostButton, misskeyButtonClassName, syncDisableState } from "../UI/MisskeyPostButton"
 import { createMisskeyImageOptionButton } from "../UI/ImageFlagButton"
-import { showNotification } from '../UI/Notification';
 import { createLocalOnlyButton, localOnlyButtonClassName } from "../UI/LocalOnlyButton";
 
 const gifButtonSelector = 'div[data-testid="gifSearchButton"]'
