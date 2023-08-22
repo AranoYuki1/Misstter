@@ -44,6 +44,10 @@ const getTweetImages: () => Promise<Attachment[]> = async () => {
     res.push({ blob: blob, isSensitive: isFlagged })
   }
 
+  if (res.length === 4) {
+    [res[1], res[2]] = [res[2], res[1]]
+  }
+
   return res;
 }
 
