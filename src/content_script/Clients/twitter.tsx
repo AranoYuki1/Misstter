@@ -55,7 +55,7 @@ const foundTweetButtonHandler = (tweetButton: HTMLElement) => {
   if (tweetBox) { addMisskeyPostButton(tweetButton, tweetBox); }
 
   // add scope button and local only button
-  const iconsBlock = document.querySelector(gifButtonSelector)?.parentElement as HTMLElement
+  const iconsBlock = document.querySelector(gifButtonSelector)?.parentElement?.parentElement as HTMLElement
   if (iconsBlock) {
     addScopeButton(iconsBlock);
     addLocalOnlyButton(iconsBlock);
