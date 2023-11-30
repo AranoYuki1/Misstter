@@ -22,7 +22,7 @@
       {
           "matches": [
             "https://twitter.com/*",
-            "https://tweetdeck.twitter.com/*"
+            "https://pro.twitter.com/*"
           ],
           "js": ["js/vendor.js", "js/content_script.js"]
       }
@@ -47,7 +47,7 @@
       ], 
       "matches": [
         "https://twitter.com/*",
-        "https://tweetdeck.twitter.com/*"
+        "https://pro.twitter.com/*"
       ] 
     }
   ]
