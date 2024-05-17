@@ -23,6 +23,8 @@
           "matches": [
             "https://twitter.com/*",
             "https://tweetdeck.twitter.com/*",
+            "https://x.com/*",
+            "https://tweetdeck.x.com/*",
             "https://example.com/*"
           ],
           "js": ["js/vendor.js", "js/content_script.js"]
@@ -48,7 +50,9 @@
       ], 
       "matches": [
         "https://twitter.com/*",
-        "https://tweetdeck.twitter.com/*"
+        "https://tweetdeck.twitter.com/*",
+        "https://x.com/*",
+        "https://tweetdeck.x.com/*"
       ] 
     }
   ]
