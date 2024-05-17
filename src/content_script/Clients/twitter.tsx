@@ -6,7 +6,7 @@ import { createMisskeyImageOptionButton } from "../UI/ImageFlagButton"
 import { createLocalOnlyButton, localOnlyButtonClassName } from "../UI/LocalOnlyButton";
 
 const gifButtonSelector = 'div[data-testid="gifSearchButton"]'
-const buttonSelector = 'div[data-testid="tweetButton"], div[data-testid="tweetButtonInline"]'
+const buttonSelector = 'button[data-testid="tweetButton"], button[data-testid="tweetButtonInline"]'
 const attachmentsImageSelector = 'div[data-testid="attachments"] div[role="group"]'
 
 // スコープボタンを作成する
