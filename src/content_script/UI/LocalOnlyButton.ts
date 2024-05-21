@@ -25,8 +25,15 @@ export const createLocalOnlyButton = () => {
             }
         });
     localOnlyButton.className = localOnlyButtonClassName;
+    
+    localOnlyButton.style.minWidth = '34px';
     localOnlyButton.style.width = '34px';
+    localOnlyButton.style.maxWidth = '34px';
+
+    localOnlyButton.style.minHeight = '34px';
     localOnlyButton.style.height = '34px';
+    localOnlyButton.style.maxHeight = '34px';
+
     localOnlyButton.style.backgroundColor = 'transparent';
     localOnlyButton.style.display = 'flex'
     localOnlyButton.style.alignItems = 'center'

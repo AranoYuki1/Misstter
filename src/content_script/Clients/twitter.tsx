@@ -5,9 +5,10 @@ import { createMisskeyPostButton, misskeyButtonClassName, syncDisableState } fro
 import { createMisskeyImageOptionButton } from "../UI/ImageFlagButton"
 import { createLocalOnlyButton, localOnlyButtonClassName } from "../UI/LocalOnlyButton";
 
-const gifButtonSelector = 'div[data-testid="gifSearchButton"]'
-const buttonSelector = 'div[data-testid="tweetButton"], div[data-testid="tweetButtonInline"]'
+const gifButtonSelector = 'button[data-testid="gifSearchButton"]'
+const buttonSelector = 'button[data-testid="tweetButton"], button[data-testid="tweetButtonInline"]'
 const attachmentsImageSelector = 'div[data-testid="attachments"] div[role="group"]'
+
 
 // スコープボタンを作成する
 const addScopeButton = (iconBox: HTMLElement) => {
@@ -55,7 +56,7 @@ const foundTweetButtonHandler = (tweetButton: HTMLElement) => {
   if (tweetBox) { addMisskeyPostButton(tweetButton, tweetBox); }
 
   // add scope button and local only button
-  const iconsBlock = document.querySelector(gifButtonSelector)?.parentElement as HTMLElement
+  const iconsBlock = document.querySelector(gifButtonSelector)?.parentElement?.parentElement as HTMLElement;
   if (iconsBlock) {
     addScopeButton(iconsBlock);
     addLocalOnlyButton(iconsBlock);
