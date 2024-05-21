@@ -8,6 +8,7 @@ import { createLocalOnlyButton, localOnlyButtonClassName } from "../UI/LocalOnly
 const gifButtonSelector = 'button[data-testid="gifSearchButton"]'
 const buttonSelector = 'button[data-testid="tweetButton"], button[data-testid="tweetButtonInline"]'
 const attachmentsImageSelector = 'div[data-testid="attachments"] div[role="group"]'
+const editButtonSelector = 'button[role="button"]'
 
 
 // スコープボタンを作成する
@@ -68,7 +69,7 @@ const foundAttachmentsImageHandler = (attachmentsImage: HTMLElement) => {
   if (attachmentsImage.getAttribute('data-has-flag-button')) return;
   attachmentsImage.setAttribute('data-has-flag-button', 'true');
   
-  const editButton = Array.from(attachmentsImage.querySelectorAll("div[role='button']"))[1] as HTMLElement;
+  const editButton = attachmentsImage.querySelector(editButtonSelector) as HTMLElement;
   if (!editButton) return;
   addMisskeyImageOptionButton(editButton, attachmentsImage);
 }
