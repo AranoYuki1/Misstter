@@ -6,7 +6,7 @@ import { getCW, getLocalOnly, getScope, getSensitive, getServer, getToken } from
 import { Attachment } from '../../common/CommonType';
 
 const getTweetText = () => {
-  const textContents = document.querySelectorAll('div[data-testid="tweetTextarea_0"] div[data-block="true"]');
+  const textContents = document.querySelectorAll('label[data-testid="tweetTextarea_0_label"]');
   if (!textContents) return;
   const text = Array.from(textContents).map((textContent) => {
     return textContent.textContent;
@@ -52,16 +52,16 @@ export const tweetToMisskey = async () => {
     const text = getTweetText();
     const images = await getTweetImages();
     const video = await getTweetVideo();
-  
+
     if (!text && images.length == 0 && !video) {
       showNotification('Misskeyへの投稿内容がありません', 'error')
       return;
     }
-  
+
     const [token, server, cw, sensitive, scope, localOnly] = await Promise.all([
       getToken(), getServer(), getCW(), getSensitive(), getScope(), getLocalOnly(),
     ])
-  
+
     const options = { cw, token, server, sensitive, scope: scope as Scope, localOnly }
     await postToMisskey(text ?? "", images, video, options);
   } catch (e) {
