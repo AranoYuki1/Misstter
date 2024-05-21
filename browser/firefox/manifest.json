@@ -3,7 +3,7 @@
 
   "name": "Misstter",
   "description": "Misstter",
-  "version": "1.0.5",
+  "version": "1.0.8",
 
   "action": {
     "default_icon": "icon.png",
@@ -20,10 +20,15 @@
 
   "content_scripts": [
       {
-          "matches": [
-            "https://twitter.com/*",
-            "https://tweetdeck.twitter.com/*"
-          ],
+        "matches": [
+          "https://twitter.com/*",
+          "https://tweetdeck.twitter.com/*",
+          
+          "https://pro.twitter.com/*",
+
+          "https://x.com/*",
+          "https://pro.x.com/*"
+        ],
           "js": ["js/vendor.js", "js/content_script.js"]
       }
   ],
@@ -49,7 +54,12 @@
       ], 
       "matches": [
         "https://twitter.com/*",
-        "https://tweetdeck.twitter.com/*"
+        "https://tweetdeck.twitter.com/*",
+        
+        "https://pro.twitter.com/*",
+
+        "https://x.com/*",
+        "https://pro.x.com/*"
       ] 
     }
   ],

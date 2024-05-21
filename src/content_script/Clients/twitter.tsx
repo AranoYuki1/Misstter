@@ -10,6 +10,7 @@ const buttonSelector = 'button[data-testid="tweetButton"], button[data-testid="t
 const attachmentsImageSelector = 'div[data-testid="attachments"] div[role="group"]'
 const editButtonSelector = 'button[role="button"]'
 
+
 // スコープボタンを作成する
 const addScopeButton = (iconBox: HTMLElement) => {
   // すでにボタンがある場合は何もしない
@@ -56,7 +57,7 @@ const foundTweetButtonHandler = (tweetButton: HTMLElement) => {
   if (tweetBox) { addMisskeyPostButton(tweetButton, tweetBox); }
 
   // add scope button and local only button
-  const iconsBlock = document.querySelector(gifButtonSelector)?.parentElement?.parentElement as HTMLElement
+  const iconsBlock = document.querySelector(gifButtonSelector)?.parentElement?.parentElement as HTMLElement;
   if (iconsBlock) {
     addScopeButton(iconsBlock);
     addLocalOnlyButton(iconsBlock);
